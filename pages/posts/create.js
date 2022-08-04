@@ -1,12 +1,20 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
+import PostSidebar from '../../components/PostSidebar/PostSidebar';
+import CreatePost from './../../components/CreatePost/CreatePost'
 
-const CreatePost = () => {
+const PostCreatePost = () => {
     return (
-        <div>
+        <>
             <Header />
-        </div>
+            <div className="md:flex w-full">
+                <PostSidebar />
+                <div className='md:w-4/5 mt-12 md:mt-0'>
+                    <CreatePost />
+                </div>
+            </div>
+        </>
     );
 }
 
-export default CreatePost;
+export default PostCreatePost;

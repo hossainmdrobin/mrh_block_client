@@ -16,9 +16,9 @@ const Posts = () => {
     return (
         <>
             <Navbar />
-            <div class="md:flex w-full">
+            <div className ="md:flex w-full">
                 <PostSidebar />
-                <div class='md:w-3/5 mt-12 md:mt-0'>
+                <div className ='md:w-3/5 mt-12 md:mt-0'>
                     <CreatePost />
                     {
                         posts ? posts.map((post) => <Post post={post} key={post._id} />) : <p className='text-2xl text-red-500'>No post Found</p>

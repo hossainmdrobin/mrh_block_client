@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import handleBlur from '../../../../functions/handleBlur';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 const SignupWithEmailPassword = () => {
     const router = useRouter()
@@ -28,29 +28,31 @@ const SignupWithEmailPassword = () => {
             })
             .then(res => res.json())
             .then(data => {
-                if(data._id){
+                if (data) {
                     console.log(data)
-                    router.push(`/create_profile/${data._id}`)
+                    localStorage.setItem('token', data.accessToken)
+                    localStorage.setItem('login', 'true')
+                    router.push(`/create_profile/${data.userId}`)
                 }
             })
-            .catch( (res) => res.json())
-            .then(err => setError({...error, err}))
+            .catch((res) => res.json())
+            .then(err => setError({ ...error, err }))
         e.preventDefault()
     }
 
     return (
-        <div class='flex justify-center w-full'>
-            <form onSubmit={handleSubmit} class='w-full sm:w-1/2 p-2 bg-gray-800 lg:w-1/3 shadow-2xl rounded-xl my-8' action="">
-                <h2 class="text-success text-xl text-center my-3">Create an Account</h2>
-                <input onBlur={blur} type="text" name="username" id="username" placeholder='username' class='input w-full my-2' />
-                {/* {error.username && <small class='text-white'>username</small>} */}
-                <input onBlur={blur} type="email" name="email" id="email" placeholder='email' class='input w-full my-2' />
-                <input onBlur={blur} type="password" name="password" id="password" placeholder='password' class='input w-full my-2' />
-                <input onBlur={blur} type="password" name="confirmPassword" id="confirmPassword" placeholder='confirm password' class='input w-full my-2' />
-                <div class="flex justify-center">
-                    <input type="submit" value='Signup' class="btn btn-ghost hover:shadow-xl normal-case bg-success my-2 text-white" />
+        <div className='flex justify-center w-full'>
+            <form onSubmit={handleSubmit} className='w-full sm:w-1/2 p-2 bg-gray-800 lg:w-1/3 shadow-2xl rounded-xl my-8' action="">
+                <h2 className="text-success text-xl text-center my-3">Create an Account</h2>
+                <input onBlur={blur} type="text" name="username" id="username" placeholder='username' className='input w-full my-2' />
+                {/* {error.username && <small className='text-white'>username</small>} */}
+                <input onBlur={blur} type="email" name="email" id="email" placeholder='email' className='input w-full my-2' />
+                <input onBlur={blur} type="password" name="password" id="password" placeholder='password' className='input w-full my-2' />
+                <input onBlur={blur} type="password" name="confirmPassword" id="confirmPassword" placeholder='confirm password' className='input w-full my-2' />
+                <div className="flex justify-center">
+                    <input type="submit" value='Signup' className="btn btn-ghost hover:shadow-xl normal-case bg-success my-2 text-white" />
                 </div>
-                <p class='mb-8 text-center text-gray-200'>Already have an account? <Link href='/auth/login'><a class='text-success hover:underline'>Login</a></Link></p>
+                <p className='mb-8 text-center text-gray-200'>Already have an account? <Link href='/auth/login'><a className='text-success hover:underline'>Login</a></Link></p>
             </form>
         </div>
     );

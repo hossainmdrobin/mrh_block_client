@@ -22,11 +22,11 @@ const PostFooter = ({post}) => {
     return (
         <div class='w-full bg-gray-200 p-4 items-center'>
             <div class="flex justify-between">
-                <div class='flex justify-center items-center'>
+                {post.likes && <div class='flex justify-center items-center'>
                     <ThumbUpIcon class='h-8 mr-2'/>
                     <p>{post.likes.length}</p>
-                </div>
-                <div>{post.comments.length} comments</div>
+                </div>}
+                {post.comments && <div>{post.comments.length} comments</div>}
             </div>
             <div class='my-4 flex justify-center items-center'>
                 <form onSubmit={handleSubmit} class='w-full'>
@@ -35,7 +35,7 @@ const PostFooter = ({post}) => {
                 </form>
             </div>
             {
-                post.comments.map(comment=> <Comments comment={comment} key={comment} />)
+                post.comments && post.comments.map(comment=> <Comments comment={comment} key={comment} />)
             }
         </div>
 

@@ -22,7 +22,6 @@ const ProfileHeader = ({ profileDetail }) => {
                         <div style={{ height: '205px', width: '205px' }} className='rounded-full bg-gray-400 flex items-center justify-center'>
                             <Image
                                 style={divStyle}
-                                loade={() => `http://localhost:5000/${profileDetail.profilePic}`}
                                 src={profileDetail.profilePic ? `http://localhost:5000/${profileDetail.profilePic}` : coverpic} 
                                 height={200} 
                                 width={200}

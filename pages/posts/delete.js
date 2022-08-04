@@ -1,17 +1,26 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import DeletePostSingle from '../../components/deletePost/DeletePostSingle';
 import Header from '../../components/Header/Header';
-import Post from '../../components/Posts/Post';
 import PostSidebar from '../../components/PostSidebar/PostSidebar';
+import getFunction from '../../functions/getFunction';
 
 const DeletePost = () => {
+    const [posts, setPosts] = useState([])
+    useEffect(()=> {
+        const url = 'http://localhost:5000/post'
+        getFunction(url, setPosts)
+    },[])
+    
     return (
         <div>
             <Header />
-            <div class="md:flex w-full">
+            <div className="md:flex w-full">
                 <PostSidebar />
-                <div class='md:w-4/5 mt-12 md:mt-0'>
-                    <Post />
-                    <Post />
+                {console.log(posts)}
+                <div className='md:w-4/5 mt-12 md:mt-0'>
+                    {
+                        posts.map(post=><DeletePostSingle post={post} key={post._id}/>)
+                    }
                 </div>
             </div>
         </div>

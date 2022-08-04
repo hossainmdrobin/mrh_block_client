@@ -14,10 +14,10 @@ const PostHeader = ({ post }) => {
         <div className='w-full bg-gray-200 p-4 flex justify-between items-center'>
             <div className=''>
                 <p className="text-xl">Md Robin Hossain</p>
-                <p className="text-sm text-gray-500">{post.createdAt}</p>
+                <p className="text-sm text-gray-500">15 jan 1999</p>
 
             </div>
-            <div onClick={addBookmark} className="tooltip tooltip-bottom mx-4 py-1 group" data-tip='Book mark this post'>
+            <div className="tooltip tooltip-bottom mx-4 py-1 group" data-tip='Book mark this post'>
                 <label class="swap">
                     <input type="checkbox" />
                     <BookmarkIcon class="swap-on fill-current text-yellow-500 h-6" width="48" height="48" viewBox="0 0 24 24" />
