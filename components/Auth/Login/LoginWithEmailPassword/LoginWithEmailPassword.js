@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import handleBlur from '../../../../functions/handleBlur';
+import { useRouter } from 'next/dist/client/router';
 const LoginWithEmailPassword = () => {
     const [loginUser, setLoginUser] = useState({ email: '', password: '' })
     const [err, setErr] = useState({})
+    const router = useRouter()
     const blur = (e) => {
         handleBlur(e, loginUser, setLoginUser)
     }
@@ -23,6 +25,7 @@ const LoginWithEmailPassword = () => {
                 if(data){
                     localStorage.setItem('token',data.accessToken)
                     localStorage.setItem('login','true')
+                    router.push('/')
                 }
             })
             .catch(err => setErr({message:'Internal Server Error'}))

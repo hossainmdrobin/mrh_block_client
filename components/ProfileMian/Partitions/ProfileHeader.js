@@ -12,14 +12,14 @@ const ProfileHeader = ({ profileDetail }) => {
         borderRadius: '50%'
     };
     return (
-        <div className="w-full flex flex-col items-center justify-center mt">
+        <div className="w-full flex flex-col items-center justify-center mt-4">
             <div style={{ maxWidth: '950px' }} >
                 <div>
                     <Image src={coverpic} height={1800} className='rounded-xl' />
                 </div>
                 <div className='md:flex justify-between items-center  relative -top-12'>
                     <div className='md:flex items-center'>
-                        <div style={{ height: '205px', width: '205px' }} className='rounded-full bg-gray-400 flex items-center justify-center'>
+                        <div style={{ height: '205px', width: '205px' }} className='rounded-full bg-white flex items-center justify-center'>
                             <Image
                                 style={divStyle}
                                 src={profileDetail.profilePic ? `http://localhost:5000/${profileDetail.profilePic}` : coverpic} 
@@ -32,7 +32,7 @@ const ProfileHeader = ({ profileDetail }) => {
                             <p className='font-bold text-gray-400'>1222 friends</p>
                         </div>
                     </div>
-                    <label htmlFor="my-modal" className="btn modal-button">
+                    <label htmlFor="my-modal" className="btn modal-button ml-3 mt-4 md:ml-0">
                         <PencilIcon className='h-6 mr-1' />
                         <p>edit profile</p>
                     </label>

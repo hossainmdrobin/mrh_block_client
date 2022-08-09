@@ -1,21 +1,26 @@
 import { BookmarkIcon } from '@heroicons/react/outline';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import getFunction from '../../../functions/getFunction'
 
 const PostHeader = ({ post }) => {
+
     const [response, setResponse] = useState({});
+    const [profile, setProfile] = useState({});
 
     const addBookmark = () => {
         const url = `http://localhost:5000/post/bookmark/${post._id}`
         getFunction(url,setResponse )
     }
+    useEffect(() => {
+        const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`
+        getFunction(url,setProfile )
+    }, []);
 
     return (
         <div className='w-full bg-gray-200 p-4 flex justify-between items-center'>
             <div className=''>
-                <p className="text-xl">Md Robin Hossain</p>
+                <p className="text-xl">{profile.name}</p>
                 <p className="text-sm text-gray-500">{post.createdAt}</p>
-
             </div>
             <div onClick={addBookmark} className="tooltip tooltip-bottom mx-4 py-1 group" data-tip='Book mark this post'>
                 <label class="swap">

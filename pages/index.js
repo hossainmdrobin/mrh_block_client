@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react'
 import Header from '../components/Header/Header'
 import ProfileBody from '../components/ProfileMian/Partitions/ProfileBody'
 import ProfileHeader from '../components/ProfileMian/Partitions/ProfileHeader'
+import {useRouter } from 'next/router'
 
 export default function Home() {
   const [profileDetail, setProfileDetail] = useState({})
-
+  const router = useRouter()
   useEffect(() => {
     const token = localStorage.getItem('token')
+    if(!token){
+      router.push('/auth/login')
+    }
     fetch('http://localhost:5000/profile',{
       headers: {
         'Authorization': 'Bearer ' + token,

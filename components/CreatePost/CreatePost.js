@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import handleBlur from '../../functions/handleBlur'
 import postFunction from '../../functions/postFunction';
 
-const CreatePost = () => {
+const CreatePost = ({response, setResponse}) => {
     const [post, setPost] = useState({})
-    const [response, setResponse] = useState({})
+    // const [response, setResponse] = useState({})
 
     const blur = (e) => {
         handleBlur(e, post, setPost)
@@ -26,7 +26,7 @@ const CreatePost = () => {
                     <div className="flex justify-center">
                         <input type="submit" value='Post' className='btn w-full mt-2' />
                     </div>
-                    {response.message && <p className="text-success mt-2 text-xl">{response.message}</p>}
+                    {response && <p className="text-success mt-2 text-xl">{response.message}</p>}
                 </form>
             </div>
         </div>

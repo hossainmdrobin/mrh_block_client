@@ -1,8 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProfileInfo from './EditProfileContent/ProfileInfo';
 import Image from 'next/image'
-import coverpic from './../../Images/coverpic.jpg'
+import { PencilAltIcon } from '@heroicons/react/outline';
+import { useRouter } from 'next/router';
+import handleBlur from './../../functions/handleBlur'
+import postFunction from '../../functions/postFunction'
+
+
 const EditProfile = ({ profileDetail }) => {
+    const [editProfilePic, setEditProfilePic] = useState(false)
+    const [editBio, setEditBio] = useState(false)
+    const [editDetail, setEditDetail] = useState(false)
+    const [image, setImage] = useState()
+    const router = useRouter()
+    const [profilePic, setProfilePic] = useState({})
+
+    //SETTING IMAGE OBJECT TO STATE
+    const handleChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setImage(URL.createObjectURL(e.target.files[0]))
+            setProfilePic(e.target.files[0])
+            console.log(e.target.files[0])
+        }
+    }
+
+    //SUBMITTING PROFILE PICTURE 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const token = localStorage.getItem('token')
+        let profileInfo = new FormData()
+        profileInfo.append('profilePic', profilePic)
+        fetch("http://localhost:5000/profile/updateProfilePic",
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                },
+                body: profileInfo,
+                method: "POST"
+            })
+            .then((res) => res.json())
+            .then(data => {
+                if (data) {
+                    console.log(data)
+                }
+            })
+            .catch(error => console.log(error))
+        
+        console.log('clicked')
+
+    }
+
+    // SETTING PROFILE DETAIL ON STATE
+    const [detail, setDetail] = useState({})
+    const blurDetail = (e) => {
+        handleBlur(e, detail, setDetail);
+    }
+    // SUBMITTING PROFILE DETAIL TO BACKEND
+    const [detailResponse, setDetailResponse] = useState({})
+    const submitDetail = (e) => {
+        const url = 'http://localhost:5000/profile/updateDetail'
+        postFunction(url,detail, setDetailResponse)
+        e.preventDefault()
+    }
+
     const roundImg = {
         borderRadius: '50%'
     }
@@ -12,29 +72,60 @@ const EditProfile = ({ profileDetail }) => {
             <div>
                 <div className='flex justify-between items-center m-2'>
                     <p className='font-bold'>Profile Picture</p>
-                    <button className='btn btn-sm'>edit</button>
+                    <button onClick={() => setEditProfilePic(!editProfilePic)} className='btn btn-sm'>
+                        <PencilAltIcon className='h-6' />
+                    </button>
                 </div>
-                <div className='flex items-center justify-center mb-2'>
+                {!editProfilePic && <div className='flex items-center justify-center mb-2'>
                     <span className='rounded-full'>
-                        <Image src={coverpic} style={roundImg} height={150} width={150} />
+                        <Image src={`http://localhost:5000/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
                     </span>
-                </div>
+                </div>}
+                {editProfilePic && <div>
+                    <div className='flex items-center justify-center mb-2'>
+                        <span className='rounded-full'>
+                            <Image src={image ? image : `http://localhost:5000/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
+                        </span>
+                    </div>
+                    <form onSubmit={handleSubmit} className='my-8'>
+                        <input onChange={handleChange} type="file" name="profilePic" id="profilePic" />
+                        <input type="submit" value="Save" className='btn btn-sm' />
+                    </form>
+
+                </div>}
+
                 <hr />
                 <div className='flex justify-between items-center m-2'>
                     <p className='font-bold'>Bio</p>
-                    <button className='btn btn-sm'>edit</button>
+                    <button onClick={() => setEditBio(!editBio)} className='btn btn-sm'>
+                        <PencilAltIcon className='h-6' />
+                    </button>
                 </div>
-                <div className='flex items-center justify-center text-gray-500 mb-4'>
-                    I am Iron-Man
-                </div>
+                {!editBio && <div className='flex items-center justify-center text-gray-500 mb-4'>
+                    {profileDetail.bio}
+                </div>}
+                {editBio && <form onSubmit={submitDetail} className='my-8'>
+                    <input onBlur={blurDetail} type="text" name="bio" id="bio" className='input my-4 bg-gray-200 w-full' placeholder='bio' /><br />
+                    <input type="submit" value="Save" className='btn btn-sm' />
+                </form>}
+
                 <hr />
                 <div className='flex justify-between items-center m-2'>
                     <p className='font-bold'>Profile Info</p>
-                    <button className='btn btn-sm'>edit</button>
+                    <button onClick={() => setEditDetail(!editDetail)} className='btn btn-sm'>
+                        <PencilAltIcon className='h-6' />
+                    </button>
                 </div>
-                <div className='flex items-center justify-center text-gray-500'>
+                {!editDetail && <div className='flex items-center justify-center text-gray-500'>
                     <ProfileInfo profileDetail={profileDetail} />
-                </div>
+                </div>}
+                {editDetail && <form onSubmit={submitDetail} action="">
+                    <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='facebook' placeholder='facebook' /> <br />
+                    <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='twitter' placeholder='twitter' /> <br />
+                    <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='website' placeholder='website' /> <br />
+                    <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='github' placeholder='github' /> <br />
+                    <input type="submit" className='btn btn-sm' value='save' /> <br />
+                </form>}
             </div>
         </>
     );

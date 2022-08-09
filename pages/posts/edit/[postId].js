@@ -6,15 +6,21 @@ import postFunction from '../../../functions/postFunction';
 import handleBlur from './../../../functions/handleBlur'
 
 const PostId = () => {
-    const [posts, setPosts] = useState({})
+    const [post, setPost] = useState({})
     const [editedPost, setEditedPost] = useState({})
     const [response, setResponse] = useState({})
     const router = useRouter()
     const id = router.query.postId
     useEffect(() => {
         const url = `http://localhost:5000/post/findPostByItsId/${id}`
-        getFunction(url, setPosts)
+        getFunction(url, setPost)
     }, [])
+
+    useEffect(()=>{
+        if(response.message){
+            setPost({title:'',body:''})
+        }
+    },[response])
 
 
     const blur = (e) => {
@@ -22,22 +28,38 @@ const PostId = () => {
     }
 
     const hanldleSubmit = (e) => {
+        const url = `http://localhost:5000/post/update/${id}`
         postFunction(url, editedPost, setResponse)
         e.preventDefault()
     }
 
+
+    const handleChange = (e) => {
+        const newPost = { post }
+        newPost[e.target.name] = e.target.value
+        setPost(newPost)
+    }
+
     return (
         <>
-            {console.log(posts)}
+            {console.log(response)}
             <Header />
+            {response.message && <div className='flex justify-center mt-4'>
+                <div class="alert alert-success shadow-lg md:w-4/5">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>{response.message}</span>
+                    </div>
+                </div>
+            </div>}
 
             <div className='flex items-center justify-center flex-col mb-4'>
                 <p className='text-center text-3xl font-bold my-4'>Edit Post</p>
                 <div class="card w-4/5 bg-base-100 shadow-xl image-full">
                     <div class="card-body">
-                        {posts.post && <form onSubmit={hanldleSubmit} action="">
-                            <input onBlur={blur} value={posts.post.title} className='input w-full my-4 text-black' type="text" name='title' placeholder='Post Tile' />
-                            <textarea onBlur={blur} value={posts.post.body} className='textarea w-full text-black' name="body" id="" placeholder='Post Content' cols="30" rows="10"></textarea>
+                        {post && <form onSubmit={hanldleSubmit} >
+                            <input onBlur={blur} onChange={handleChange} value={post.title} className='input w-full my-4 text-black' type="text" name='title'  placeholder='Post Tile' />
+                            <textarea onBlur={blur} onChange={handleChange} value={post.body} className='textarea w-full text-black' name="body" id="" placeholder='Post Content' cols="30" rows="10"></textarea>
                             <div className='relative h-12 mt-2'>
                                 <input className='absolute right-0 btn' type="submit" value="Submit" />
                             </div>
