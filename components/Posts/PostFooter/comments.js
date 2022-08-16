@@ -10,13 +10,13 @@ const Comments = ({comment}) => {
     }, []);
 
     useEffect(()=>{
-        const url = `http://localhost:5000/comment/user/${loadComment.user}`
+        const url = `http://localhost:5000/profile/getProfileByUserId/${loadComment.user}`
         getFunction(url, setUser)
 
     },[loadComment])
     return (
         <div className='bg-white rounded my-2 p-2'>
-            <p className='font-bold'>{user.username}</p>
+            <p className='font-bold'>{user.name}</p>
             <p className='text-gray-500'>{loadComment.body}</p>
         </div>
     );

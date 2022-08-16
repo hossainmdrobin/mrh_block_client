@@ -3,7 +3,7 @@ import handleBlur from '../../../functions/handleBlur'
 import postFunction from '../../../functions/postFunction'
 import {
     ThumbUpIcon
-} from '@heroicons/react/outline'
+} from '@heroicons/react/solid'
 import Comments from './comments';
 
 const PostFooter = ({post}) => {
@@ -23,7 +23,7 @@ const PostFooter = ({post}) => {
         <div class='w-full bg-gray-200 p-4 items-center'>
             <div class="flex justify-between">
                 {post.likes && <div class='flex justify-center items-center'>
-                    <ThumbUpIcon class='h-8 mr-2'/>
+                    <ThumbUpIcon class='h-8 mr-2 hover:text-primary cursor-pointer'/>
                     <p>{post.likes.length}</p>
                 </div>}
                 {post.comments && <div>{post.comments.length} comments</div>}
