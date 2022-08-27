@@ -13,7 +13,7 @@ const AddFriendCard = ({ friend }) => {
     return (
         <div className='shadow-2xl p-4 rounded-lg bg-gray-100'>
             <div style={{maxHeight:'500px'}} className='flex justify-center'>
-                <img className='h-64' src={`https://mrhblog.herokuapp.com/${friend.profilePic}`} alt="" />
+                <img className='h-64' src={`https://mrhblog.herokuapp.com/${friend.profilePic}`} alt="profile pic" />
             </div>
             <p className='text-success text-xl mt-4'>{friend.name}</p>
             <p className='text-sm text-gray-400 my-2'>{friend.title}</p>

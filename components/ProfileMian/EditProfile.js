@@ -78,19 +78,19 @@ const EditProfile = ({ profileDetail }) => {
                 </div>
                 {!editProfilePic && <div className='flex items-center justify-center mb-2'>
                     <span className='rounded-full'>
-                        <Image src={`https://mrhblog.herokuapp.com/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
+                        <Image src={`https://mrhblog.herokuapp.com/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} alt='profilepic'/>
                     </span>
                 </div>}
                 {editProfilePic && <div>
                     <div className='flex items-center justify-center mb-2'>
                         <span className='rounded-full'>
-                            <Image src={image ? image : `https://mrhblog.herokuapp.com/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
+                            <Image src={image ? image : `https://mrhblog.herokuapp.com/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} alt='profilepic'/>
                         </span>
                     </div>
                     <form onSubmit={handleSubmit} className='my-8'>
                         <input onChange={handleChange} type="file" name="profilePic" id="profilePic" />
                         {!loading && <input type="submit" value="Save" className='btn btn-sm' />}
-                        {loading && <button class="btn btn-sm loading">wait...</button>}
+                        {loading && <button className="btn btn-sm loading">wait...</button>}
                     </form>
 
                 </div>}
@@ -108,7 +108,7 @@ const EditProfile = ({ profileDetail }) => {
                 {editBio && <form onSubmit={submitDetail} className='my-8'>
                     <input onBlur={blurDetail} type="text" name="bio" id="bio" className='input my-4 bg-gray-200 w-full' placeholder='bio' /><br />
                     {!loading && <input type="submit" value="Save" className='btn btn-sm' />}
-                    {loading && <button class="btn btn-sm loading">please wait...</button>}
+                    {loading && <button className="btn btn-sm loading">please wait...</button>}
                 </form>}
 
                 <hr />
@@ -127,7 +127,7 @@ const EditProfile = ({ profileDetail }) => {
                     <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='website' placeholder='website' /> <br />
                     <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='github' placeholder='github' /> <br />
                     {!loading && <input type="submit" value="Save" className='btn btn-sm' />}
-                    {loading && <button class="btn btn-sm loading">please wait...</button>} <br />
+                    {loading && <button className="btn btn-sm loading">please wait...</button>} <br />
                 </form>}
             </div>
         </>

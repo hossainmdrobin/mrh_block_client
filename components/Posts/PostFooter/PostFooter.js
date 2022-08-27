@@ -21,18 +21,18 @@ const PostFooter = ({post}) => {
     }
 
     return (
-        <div class='w-full bg-gray-200 p-4 items-center'>
-            <div class="flex justify-between">
-                {post.likes && <div class='flex justify-center items-center'>
-                    <ThumbUpIcon class='h-8 mr-2 hover:text-primary cursor-pointer'/>
+        <div className='w-full bg-gray-200 p-4 items-center'>
+            <div className="flex justify-between">
+                {post.likes && <div className='flex justify-center items-center'>
+                    <ThumbUpIcon className='h-8 mr-2 hover:text-primary cursor-pointer'/>
                     <p>{post.likes.length}</p>
                 </div>}
                 {post.comments && <div>{post.comments.length} comments</div>}
             </div>
-            <div class='my-4 flex justify-center items-center'>
-                <form onSubmit={handleSubmit} class='w-full'>
+            <div className='my-4 flex justify-center items-center'>
+                <form onSubmit={handleSubmit} className='w-full'>
                     <textarea onBlur={blur} className='w-full textarea mb-2' name="body" id="comment" placeholder='Comment...' cols="30" rows="3"></textarea><br />
-                    {!loading && <input type="submit" value='Comment' class='btn' />}
+                    {!loading && <input type="submit" value='Comment' className='btn' />}
                     {loading && <button className='btn loading '>Please Wait...</button>}
                 </form>
             </div>

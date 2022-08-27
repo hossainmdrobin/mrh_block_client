@@ -21,7 +21,6 @@ const Dashboard = () => {
             <DashboardSidebar />
             <div className='flex justify-center items-center'>
                 <div className='grid w-11/12 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4'>
-                    {console.log(addFriends)}
                     {
                         addFriends.map(friend => <AddFriendCard friend={friend} />)
                     }

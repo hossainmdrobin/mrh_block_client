@@ -5,8 +5,8 @@ import NumOfFriends from './NumOfFriend/NumOfFriends';
 
 const FriendList = () => {
     return (
-        <div class='md:w-1/5 relative'>
-            <div class='md:sticky top-4'>
+        <div className='md:w-1/5 relative'>
+            <div className='md:sticky top-4'>
                 <NumOfFriends />
                 <FriendTable />
             </div>

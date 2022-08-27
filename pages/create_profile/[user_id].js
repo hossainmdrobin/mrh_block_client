@@ -55,7 +55,7 @@ const CreateProfile = () => {
             <div className='flex justify-center items-center relative'>
                 <div htmlFor='profilePic' className='overflow-hidden h-44 w-44 rounded-full bg-success flex justify-center cursor-pointer items-center'>
                     {!image && <UserIcon className='h-24 text-gray-400' />}
-                    {image && <img src={image} className='w-full h-full' alt="" />}
+                    {image && <img src={image} className='w-full h-full' alt="image" />}
                 </div>
                 <label htmlFor="profilePic" className='relative top-8 right-6 bg-gray-400 rounded-full p-1 cursor-pointer'>
                     <CameraIcon className='h-5 text-white' />
