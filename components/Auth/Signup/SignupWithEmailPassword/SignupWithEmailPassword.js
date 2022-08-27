@@ -17,7 +17,7 @@ const SignupWithEmailPassword = () => {
     }
 
     const handleSubmit = (e) => {
-        fetch("http://localhost:5000/auth/signup",
+        fetch("https://mrhblog.herokuapp.com/auth/signup",
             {
                 headers: {
                     'Accept': 'application/json',

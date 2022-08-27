@@ -13,7 +13,7 @@ export default function Home() {
     if(!token){
       router.push('/auth/login')
     }
-    fetch('http://localhost:5000/profile',{
+    fetch('https://mrhblog.herokuapp.com/profile',{
       headers: {
         'Authorization': 'Bearer ' + token,
       }

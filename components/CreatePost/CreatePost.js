@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import handleBlur from '../../functions/handleBlur'
 import postFunction from '../../functions/postFunction';
 
 const CreatePost = ({response, setResponse}) => {
     const [post, setPost] = useState({})
-    // const [response, setResponse] = useState({})
+    const [loading, setLoading] = useState(false)
+    
 
     const blur = (e) => {
         handleBlur(e, post, setPost)
     }
 
     const handleSubmit = (e) => {
-        postFunction('http://localhost:5000/post', post, setResponse)
+        postFunction('https://mrhblog.herokuapp.com/post', post, setResponse, setLoading)
         e.preventDefault()
     }
 
@@ -24,7 +25,8 @@ const CreatePost = ({response, setResponse}) => {
                     <input onBlur={blur} className='input w-full bg-gray-200' type="Post Header" placeholder='Post Header' name='title' />
                     <textarea onBlur={blur} className='textarea w-full bg-gray-200 mt-4' placeholder='Post Body' name="body" id="postBody" cols="30" rows="5"></textarea>
                     <div className="flex justify-center">
-                        <input type="submit" value='Post' className='btn w-full mt-2' />
+                        {!loading && <input type="submit" value='Post' className='btn w-full mt-2' />}
+                        {loading && <button class="btn w-full mt-2 loading">Please wait...</button>}
                     </div>
                     {response && <p className="text-success mt-2 text-xl">{response.message}</p>}
                 </form>

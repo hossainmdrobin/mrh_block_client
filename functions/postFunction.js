@@ -1,4 +1,5 @@
-export default function (url, obj, func1) {
+export default function (url, obj, func1,loading) {
+    loading(true)
     const token = localStorage.getItem('token')    
     const options = {
         method: 'POST',
@@ -12,6 +13,9 @@ export default function (url, obj, func1) {
 
     fetch(url, options)
         .then(response => response.json())
-        .then(response => func1(response))
+        .then(response => {
+            loading(false)
+            func1(response)
+        })
         .catch(err => console.log(err));
 }

@@ -14,6 +14,7 @@ const EditProfile = ({ profileDetail }) => {
     const [image, setImage] = useState()
     const router = useRouter()
     const [profilePic, setProfilePic] = useState({})
+    const [loading, setLoading] = useState(false)
 
     //SETTING IMAGE OBJECT TO STATE
     const handleChange = (e) => {
@@ -26,11 +27,12 @@ const EditProfile = ({ profileDetail }) => {
 
     //SUBMITTING PROFILE PICTURE 
     const handleSubmit = (e) => {
+        setLoading(true)
         e.preventDefault()
         const token = localStorage.getItem('token')
         let profileInfo = new FormData()
         profileInfo.append('profilePic', profilePic)
-        fetch("http://localhost:5000/profile/updateProfilePic",
+        fetch("https://mrhblog.herokuapp.com/profile/updateProfilePic",
             {
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -42,12 +44,10 @@ const EditProfile = ({ profileDetail }) => {
             .then(data => {
                 if (data) {
                     console.log(data)
+                    setLoading(false)
                 }
             })
             .catch(error => console.log(error))
-        
-        console.log('clicked')
-
     }
 
     // SETTING PROFILE DETAIL ON STATE
@@ -58,8 +58,8 @@ const EditProfile = ({ profileDetail }) => {
     // SUBMITTING PROFILE DETAIL TO BACKEND
     const [detailResponse, setDetailResponse] = useState({})
     const submitDetail = (e) => {
-        const url = 'http://localhost:5000/profile/updateDetail'
-        postFunction(url,detail, setDetailResponse)
+        const url = 'https://mrhblog.herokuapp.com/profile/updateDetail'
+        postFunction(url, detail, setDetailResponse, setLoading)
         e.preventDefault()
     }
 
@@ -78,18 +78,19 @@ const EditProfile = ({ profileDetail }) => {
                 </div>
                 {!editProfilePic && <div className='flex items-center justify-center mb-2'>
                     <span className='rounded-full'>
-                        <Image src={`http://localhost:5000/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
+                        <Image src={`https://mrhblog.herokuapp.com/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
                     </span>
                 </div>}
                 {editProfilePic && <div>
                     <div className='flex items-center justify-center mb-2'>
                         <span className='rounded-full'>
-                            <Image src={image ? image : `http://localhost:5000/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
+                            <Image src={image ? image : `https://mrhblog.herokuapp.com/${profileDetail.profilePic}`} style={roundImg} height={150} width={150} />
                         </span>
                     </div>
                     <form onSubmit={handleSubmit} className='my-8'>
                         <input onChange={handleChange} type="file" name="profilePic" id="profilePic" />
-                        <input type="submit" value="Save" className='btn btn-sm' />
+                        {!loading && <input type="submit" value="Save" className='btn btn-sm' />}
+                        {loading && <button class="btn btn-sm loading">wait...</button>}
                     </form>
 
                 </div>}
@@ -106,7 +107,8 @@ const EditProfile = ({ profileDetail }) => {
                 </div>}
                 {editBio && <form onSubmit={submitDetail} className='my-8'>
                     <input onBlur={blurDetail} type="text" name="bio" id="bio" className='input my-4 bg-gray-200 w-full' placeholder='bio' /><br />
-                    <input type="submit" value="Save" className='btn btn-sm' />
+                    {!loading && <input type="submit" value="Save" className='btn btn-sm' />}
+                    {loading && <button class="btn btn-sm loading">please wait...</button>}
                 </form>}
 
                 <hr />
@@ -124,7 +126,8 @@ const EditProfile = ({ profileDetail }) => {
                     <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='twitter' placeholder='twitter' /> <br />
                     <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='website' placeholder='website' /> <br />
                     <input onBlur={blurDetail} type="text" className='input my-2 bg-gray-200 w-full' name='github' placeholder='github' /> <br />
-                    <input type="submit" className='btn btn-sm' value='save' /> <br />
+                    {!loading && <input type="submit" value="Save" className='btn btn-sm' />}
+                    {loading && <button class="btn btn-sm loading">please wait...</button>} <br />
                 </form>}
             </div>
         </>

@@ -7,7 +7,7 @@ const Myposts = () => {
     const [posts, setPost] = useState([])
 
     useEffect(() => {
-        getFunction('http://localhost:5000/post', setPost)
+        getFunction('https://mrhblog.herokuapp.com/post', setPost)
     }, []);
     return (
         <>

@@ -9,7 +9,7 @@ import getFunction from '../../functions/getFunction';
 const Bookmarks = () => {
     const [bookmarks, setBookmarks] = useState([])
     useEffect(()=>{
-        const url = 'http://localhost:5000/post/getBookmarkedPost'
+        const url = 'https://mrhblog.herokuapp.com/post/getBookmarkedPost'
         getFunction(url,setBookmarks)
     },[])
 

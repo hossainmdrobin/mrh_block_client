@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserIcon, CameraIcon } from '@heroicons/react/outline'
+import { UserIcon, CameraIcon, ExclamationCircleIcon } from '@heroicons/react/outline'
 import handleBlur from '../../functions/handleBlur';
 import { useRouter } from 'next/router';
 
@@ -8,7 +8,9 @@ const CreateProfile = () => {
     const [image, setImage] = useState()
     const [profile, setProfile] = useState({})
     const router = useRouter()
-    const { user_id } = router.query
+    const { user_id } = router.query;
+    const [response, setResponse] = useState({})
+    const [loading, setLoading] = useState(false)
 
     const blur = (e) => {
         handleBlur(e, profile, setProfile);
@@ -18,18 +20,18 @@ const CreateProfile = () => {
         if (e.target.files && e.target.files[0]) {
             setImage(URL.createObjectURL(e.target.files[0]))
             setProfilePic(e.target.files[0])
-            console.log(e.target.files[0])
         }
     }
 
     const handleSubmit = (e) => {
+        setLoading(true)
         const profileInfo = new FormData()
         profileInfo.append('profilePic', profilePic)
         profileInfo.append('user', user_id)
         Object.keys(profile).map(p => {
             profileInfo.append(p, profile[p])
         })
-        fetch("http://localhost:5000/profile",
+        fetch("https://mrhblog.herokuapp.com/profile",
             {
                 body: profileInfo,
                 method: "POST"
@@ -38,6 +40,8 @@ const CreateProfile = () => {
             .then(data => {
                 if (data) {
                     console.log(data)
+                    setResponse(data);
+                    setLoading(false)
                     router.push('/')
                 }
             })
@@ -57,6 +61,10 @@ const CreateProfile = () => {
                     <CameraIcon className='h-5 text-white' />
                 </label>
             </div>
+            {response && <div className="flex justify-center items-center">
+                <ExclamationCircleIcon className='h-8 text-error' />
+                <p className='my-4 text-center text-error'> You must provide a Profile picture</p>
+            </div>}
             <div className='flex justify-center items-center'>
                 <form onSubmit={handleSubmit} className='p-2 w-full md:w-1/2 flex flex-col items-center'>
                     <input onChange={handleChange} type="file" name="profilePic" id="profilePic" className='hidden' />
@@ -68,8 +76,13 @@ const CreateProfile = () => {
                     <input onBlur={blur} type="text" placeholder='Your twitter profile url' name='twitter' className='input input-success my-4 w-full' />
                     <input onBlur={blur} type="text" placeholder='Your github profile url' name='github' className='input input-success my-4 w-full' />
                     <div className='flex justify-center my-4 w-full'>
-                        <input type="submit" value="Save" className='btn btn-success w-full text-white' />
+                        {!loading && <input type="submit" value="Save" className='btn btn-success w-full text-white' />}
+                        {loading && <button className='btn btn-success w-full text-white loading'>Please wait...</button>}
                     </div>
+                    {response && <div className="flex justify-center items-center">
+                        <ExclamationCircleIcon className='h-8 text-error' />
+                        <p className='my-4 text-center text-error'> You must provide a Profile picture</p>
+                    </div>}
                 </form>
             </div>
         </div>

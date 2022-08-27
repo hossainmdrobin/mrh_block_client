@@ -12,7 +12,7 @@ const BookmarkPost = ({bookmark}) => {
     
 
     useEffect(() => {
-        const url = `http://localhost:5000/post/findPostByItsId/${bookmark}`
+        const url = `https://mrhblog.herokuapp.com/post/findPostByItsId/${bookmark}`
         getFunction(url,setPosts)
     }, []);
     return (

@@ -8,14 +8,15 @@ import Comments from './comments';
 
 const PostFooter = ({post}) => {
     const [comment, setComment] = useState({})
+    const [loading, setLoading] = useState(false)
 
     const blur = (e) => {
         handleBlur(e,comment, setComment)
     }
 
     const handleSubmit = (e) => {
-        const url = `http://localhost:5000/comment/add/${post._id}`
-        postFunction(url, comment, setComment)
+        const url = `https://mrhblog.herokuapp.com/comment/add/${post._id}`
+        postFunction(url, comment, setComment,setLoading)
         e.preventDefault()
     }
 
@@ -31,7 +32,8 @@ const PostFooter = ({post}) => {
             <div class='my-4 flex justify-center items-center'>
                 <form onSubmit={handleSubmit} class='w-full'>
                     <textarea onBlur={blur} className='w-full textarea mb-2' name="body" id="comment" placeholder='Comment...' cols="30" rows="3"></textarea><br />
-                    <input type="submit" value='Comment' class='btn' />
+                    {!loading && <input type="submit" value='Comment' class='btn' />}
+                    {loading && <button className='btn loading '>Please Wait...</button>}
                 </form>
             </div>
             {

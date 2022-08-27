@@ -22,7 +22,7 @@ const ProfileHeader = ({ profileDetail }) => {
                         <div style={{ height: '205px', width: '205px' }} className='rounded-full bg-white flex items-center justify-center'>
                             <Image
                                 style={divStyle}
-                                src={profileDetail.profilePic ? `http://localhost:5000/${profileDetail.profilePic}` : coverpic} 
+                                src={profileDetail.profilePic ? `https://mrhblog.herokuapp.com/${profileDetail.profilePic}` : coverpic} 
                                 height={200} 
                                 width={200}
                             />

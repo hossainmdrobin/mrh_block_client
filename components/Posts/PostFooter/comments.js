@@ -5,12 +5,12 @@ const Comments = ({comment}) => {
     const [loadComment, setloadComment] = useState({});
     const [user, setUser] = useState({})
     useEffect(() => {
-        const url = `http://localhost:5000/comment/get/${comment}`
+        const url = `https://mrhblog.herokuapp.com/comment/get/${comment}`
         getFunction(url,setloadComment)
     }, []);
 
     useEffect(()=>{
-        const url = `http://localhost:5000/profile/getProfileByUserId/${loadComment.user}`
+        const url = `https://mrhblog.herokuapp.com/profile/getProfileByUserId/${loadComment.user}`
         getFunction(url, setUser)
 
     },[loadComment])

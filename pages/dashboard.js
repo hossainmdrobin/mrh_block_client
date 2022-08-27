@@ -12,7 +12,7 @@ const Dashboard = () => {
         if (!token) {
             router.push('/auth/login')
         }
-        const url = `http://localhost:5000/profile/getUnaddedProfile`
+        const url = `https://mrhblog.herokuapp.com/profile/getUnaddedProfile`
         getFunction(url, setAddFriends)
     }, []);
 

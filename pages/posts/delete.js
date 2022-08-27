@@ -7,7 +7,7 @@ import getFunction from '../../functions/getFunction';
 const DeletePost = () => {
     const [posts, setPosts] = useState([])
     useEffect(()=> {
-        const url = 'http://localhost:5000/post'
+        const url = 'https://mrhblog.herokuapp.com/post'
         getFunction(url, setPosts)
     },[])
     

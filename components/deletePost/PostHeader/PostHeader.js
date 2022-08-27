@@ -5,13 +5,13 @@ import getFunction from '../../../functions/getFunction'
 const PostHeader = ({ post }) => {
     const [response, setResponse] = useState({});
     const deletePost = () => {
-        const url = `http://localhost:5000/post/delete/${post._id}`
+        const url = `https://mrhblog.herokuapp.com/post/delete/${post._id}`
         getFunction(url,setResponse )
     }
     const [profile, setProfile] = useState({});
 
     useEffect(() => {
-        const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`
+        const url = `https://mrhblog.herokuapp.com/profile/getProfileByUserId/${post.author}`
         getFunction(url,setProfile )
     }, []);
     return (

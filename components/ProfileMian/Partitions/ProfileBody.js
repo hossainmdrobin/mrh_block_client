@@ -9,7 +9,7 @@ const ProfileBody = ({ profileDetail }) => {
     const [response, setResponse] = useState()
 
     useEffect(() => {
-        getFunction('http://localhost:5000/post', setPost)
+        getFunction('https://mrhblog.herokuapp.com/post', setPost)
     }, [response]);
     return (
         <div className='flex justify-center items-center bg-gray-200'>

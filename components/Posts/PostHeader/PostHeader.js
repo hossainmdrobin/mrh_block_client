@@ -8,11 +8,11 @@ const PostHeader = ({ post }) => {
     const [profile, setProfile] = useState({});
 
     const addBookmark = () => {
-        const url = `http://localhost:5000/post/bookmark/${post._id}`
+        const url = `https://mrhblog.herokuapp.com/post/bookmark/${post._id}`
         getFunction(url,setResponse )
     }
     useEffect(() => {
-        const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`
+        const url = `https://mrhblog.herokuapp.com/profile/getProfileByUserId/${post.author}`
         getFunction(url,setProfile )
     }, []);
 

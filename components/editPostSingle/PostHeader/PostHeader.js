@@ -8,7 +8,7 @@ const PostHeader = ({ post }) => {
 
     const router = useRouter()
     useEffect(() => {
-        const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`
+        const url = `https://mrhblog.herokuapp.com/profile/getProfileByUserId/${post.author}`
         getFunction(url,setProfile )
     }, []);
 
