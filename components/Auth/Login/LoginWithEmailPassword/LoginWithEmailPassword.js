@@ -42,7 +42,7 @@ const LoginWithEmailPassword = () => {
                 <div className="flex justify-center">
                     <input type="submit" value="Login" className="btn btn-ghost hover:shadow-xl normal-case bg-success my-2 text-white" />
                 </div>
-                <p className="mb-8 text-center text-gray-200">Don't have an account? <Link href="/auth/signup"><span className="text-success hover:underline">Sign Up</span></Link></p>
+                <p className="mb-8 text-center text-gray-200">Do not have an account? <Link href="/auth/signup"><span className="text-success hover:underline">Sign Up</span></Link></p>
 
                 {err && <p>{err.message}</p>}
             </form>
