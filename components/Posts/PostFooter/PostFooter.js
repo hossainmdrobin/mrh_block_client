@@ -37,7 +37,7 @@ const PostFooter = ({post}) => {
                 </form>
             </div>
             {
-                post.comments && post.comments.map(comment=> <Comments comment={comment} key={comment} />)
+                post.comments && post.comments.map((comment,i)=> <Comments comment={comment} key={i} />)
             }
         </div>
 

@@ -11,7 +11,7 @@ const Bookmarks = () => {
     useEffect(()=>{
         const url = 'https://mrhblog.herokuapp.com/post/getBookmarkedPost'
         getFunction(url,setBookmarks)
-    },[])
+    },[bookmarks])
 
 
     return (
@@ -23,7 +23,7 @@ const Bookmarks = () => {
                 <div className='md:w-4/5 mt-12 md:mt-0'>
                     
                     {
-                        bookmarks.map(b=><BookmarkPost bookmark={b} key={b} />)
+                        bookmarks.map((b,i)=><BookmarkPost bookmark={b} key={i} />)
                     }
                     
                 </div>

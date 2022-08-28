@@ -7,7 +7,7 @@ const RemoveFriendCard = ({friend, deleteRes, setDeleteRes}) => {
     useEffect(() => {
         const url = `https://mrhblog.herokuapp.com/profile/getFriendsProfileById/${friend}`
         getFunction(url, setProfile)
-    }, [])
+    }, [profile])
 
     const removeProfile = () => {
         const url = `https://mrhblog.herokuapp.com/profile/deleteFriend/${friend}`

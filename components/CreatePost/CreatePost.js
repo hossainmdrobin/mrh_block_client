@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import handleBlur from '../../functions/handleBlur'
 import postFunction from '../../functions/postFunction';
 

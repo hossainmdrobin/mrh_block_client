@@ -14,7 +14,7 @@ const PostHeader = ({ post }) => {
     useEffect(() => {
         const url = `https://mrhblog.herokuapp.com/profile/getProfileByUserId/${post.author}`
         getFunction(url,setProfile )
-    }, []);
+    }, [ profile]);
 
     return (
         <div className='w-full bg-gray-200 p-4 flex justify-between items-center'>

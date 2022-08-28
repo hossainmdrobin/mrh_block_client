@@ -14,7 +14,7 @@ const BookmarkPost = ({bookmark}) => {
     useEffect(() => {
         const url = `https://mrhblog.herokuapp.com/post/findPostByItsId/${bookmark}`
         getFunction(url,setPosts)
-    }, []);
+    }, [post]);
     return (
         <div className='p-4 mx-1'>
             {console.log(bookmark)}

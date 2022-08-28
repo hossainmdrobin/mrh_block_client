@@ -10,7 +10,7 @@ const Friends = () => {
         const url = 'https://mrhblog.herokuapp.com/profile/getProfileById'
         getFunction(url, setProfile)
         
-    },[])
+    },[profile])
     useEffect(()=> {
         if(profile){
             setFriends(profile.friends)
@@ -26,7 +26,7 @@ const Friends = () => {
             <div className='flex justify-center items-center'>
                 <div className='grid w-11/12 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4'>
                     {
-                        friends?.map((friend)=><AddedFriendCard friend={friend} />)
+                        friends?.map((friend)=><AddedFriendCard friend={friend} key={friend._id} />)
                     }
                 </div>
             </div>

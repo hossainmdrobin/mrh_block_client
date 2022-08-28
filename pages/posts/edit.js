@@ -9,7 +9,7 @@ const EditPost = () => {
     useEffect(() => {
         const url = 'https://mrhblog.herokuapp.com/post'
         getFunction(url, setPosts)
-    }, [])
+    }, [posts])
     return (
         <div>
             <Header />
@@ -17,7 +17,7 @@ const EditPost = () => {
                 <PostSidebar />
                 <div className='md:w-4/5 mt-12 md:mt-0'>
                     {
-                        posts.map(post => <EditPostSingle post={post} />)
+                        posts.map((post,i) => <EditPostSingle post={post}  key={i}/>)
                     }
 
                 </div>

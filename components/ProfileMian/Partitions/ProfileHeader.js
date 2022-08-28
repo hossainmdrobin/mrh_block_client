@@ -15,7 +15,7 @@ const ProfileHeader = ({ profileDetail }) => {
         <div className="w-full flex flex-col items-center justify-center mt-4">
             <div style={{ maxWidth: '950px' }} >
                 <div>
-                    <Image src={coverpic} height={1800} className='rounded-xl' />
+                    <Image src={coverpic} height={1800} className='rounded-xl' alt='profile' />
                 </div>
                 <div className='md:flex justify-between items-center  relative -top-12'>
                     <div className='md:flex items-center'>
@@ -25,6 +25,7 @@ const ProfileHeader = ({ profileDetail }) => {
                                 src={profileDetail.profilePic ? `https://mrhblog.herokuapp.com/${profileDetail.profilePic}` : coverpic} 
                                 height={200} 
                                 width={200}
+                                alt='profile'
                             />
                         </div>
                         <div className='ml-3'>

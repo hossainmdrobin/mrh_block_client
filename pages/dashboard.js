@@ -14,7 +14,7 @@ const Dashboard = () => {
         }
         const url = `https://mrhblog.herokuapp.com/profile/getUnaddedProfile`
         getFunction(url, setAddFriends)
-    }, []);
+    }, [addFriends]);
 
     return (
         <>
@@ -22,7 +22,7 @@ const Dashboard = () => {
             <div className='flex justify-center items-center'>
                 <div className='grid w-11/12 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4'>
                     {
-                        addFriends.map(friend => <AddFriendCard friend={friend} />)
+                        addFriends.map(friend => <AddFriendCard friend={friend} key={friend._id} />)
                     }
                 </div>
             </div>

@@ -8,7 +8,7 @@ const Myposts = () => {
 
     useEffect(() => {
         getFunction('https://mrhblog.herokuapp.com/post', setPost)
-    }, []);
+    }, [posts]);
     return (
         <>
             <Header />

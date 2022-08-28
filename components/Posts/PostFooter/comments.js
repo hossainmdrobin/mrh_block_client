@@ -7,13 +7,13 @@ const Comments = ({comment}) => {
     useEffect(() => {
         const url = `https://mrhblog.herokuapp.com/comment/get/${comment}`
         getFunction(url,setloadComment)
-    }, []);
+    }, [loadComment]);
 
     useEffect(()=>{
         const url = `https://mrhblog.herokuapp.com/profile/getProfileByUserId/${loadComment.user}`
         getFunction(url, setUser)
 
-    },[loadComment])
+    },[user])
     return (
         <div className='bg-white rounded my-2 p-2'>
             <p className='font-bold'>{user.name}</p>

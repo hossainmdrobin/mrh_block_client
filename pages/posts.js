@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import CreatePost from '../components/CreatePost/CreatePost';
 import FriendList from '../components/FriendList/FriendList';
 import Navbar from '../components/Header/Navbar/Navbar';

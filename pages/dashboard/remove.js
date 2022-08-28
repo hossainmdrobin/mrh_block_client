@@ -27,7 +27,7 @@ const Remove = () => {
             <div className='flex justify-center items-center'>
                 <div className='grid w-11/12 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4'>
                     {
-                        friends?.map((friend) => <RemoveFriendCard friend={friend} deleteRes={deleteRes} setDeleteRes={setDeleteRes} />)
+                        friends?.map((friend,i) => <RemoveFriendCard friend={friend} deleteRes={deleteRes} setDeleteRes={setDeleteRes} key={i}/>)
                     }
                 </div>
             </div>

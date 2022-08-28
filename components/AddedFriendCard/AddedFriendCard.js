@@ -7,7 +7,7 @@ const AddedFriendCard = ({ friend }) => {
         const url = `https://mrhblog.herokuapp.com/profile/getFriendsProfileById/${friend}`
         getFunction(url, setProfile)
 
-    }, [])
+    }, [profile])
 
     return (
         <div className='shadow-2xl p-4 rounded-lg bg-gray-100'>

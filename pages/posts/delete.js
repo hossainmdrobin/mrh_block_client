@@ -9,7 +9,7 @@ const DeletePost = () => {
     useEffect(()=> {
         const url = 'https://mrhblog.herokuapp.com/post'
         getFunction(url, setPosts)
-    },[])
+    },[posts])
     
     return (
         <div>

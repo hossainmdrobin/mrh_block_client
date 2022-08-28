@@ -22,7 +22,7 @@ export default function Home() {
       .then(data => setProfileDetail(data))
       .catch(err => console.log(err))
 
-  }, []);
+  }, [profileDetail]);
   return (
     <div>
       <Head>
