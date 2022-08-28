@@ -8,7 +8,7 @@ const DashboardSidebar = () => {
     return (
         <div className='relative top-0 z-10'>
             <div class={isOpen?'z-100 w-60 h-screen fixed bg-success transition-all duration-1000 ease-in-out':'w-60 h-screen fixed bg-success -left-60 transition-all duration-1000 ease-in-out'}>
-                <p onClick={()=> router.push('/')} class="text-2xl text-center my-4 transition-all duration-500 ease-in-out cursor-pointer">MRH BLOG</p>
+                <p onClick={()=> router.push('/')} className="text-2xl text-center my-4 transition-all duration-500 ease-in-out cursor-pointer">MRH BLOG</p>
                 <SidebarItem title='Dashboard' Icon={ViewGridAddIcon} url='/dashboard' />
                 <SidebarItem title='Friends' Icon={UserIcon} url='/dashboard/friends' />
                 <SidebarItem title='Remove Friends' Icon={TrashIcon} url='/dashboard/remove' />

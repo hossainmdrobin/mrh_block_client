@@ -11,7 +11,7 @@ const PostFooter = ({post}) => {
 
     return (
         <div className='w-full bg-gray-200 p-4 items-center'>
-            <div class="flex justify-between">
+            <div className="flex justify-between">
                 <div className='flex justify-center items-center'>
                     <ThumbUpIcon className='h-8 mr-2'/>
                     <p>122</p>

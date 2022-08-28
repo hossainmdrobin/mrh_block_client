@@ -45,9 +45,9 @@ const PostId = () => {
             {console.log(response)}
             <Header />
             {response.message && <div className='flex justify-center mt-4'>
-                <div class="alert alert-success shadow-lg md:w-4/5">
+                <div className="alert alert-success shadow-lg md:w-4/5">
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <span>{response.message}</span>
                     </div>
                 </div>
@@ -55,8 +55,8 @@ const PostId = () => {
 
             <div className='flex items-center justify-center flex-col mb-4'>
                 <p className='text-center text-3xl font-bold my-4'>Edit Post</p>
-                <div class="card w-4/5 bg-base-100 shadow-xl image-full">
-                    <div class="card-body">
+                <div className="card w-4/5 bg-base-100 shadow-xl image-full">
+                    <div className="card-body">
                         {post && <form onSubmit={hanldleSubmit} >
                             <input onBlur={blur} onChange={handleChange} value={post.title} className='input w-full my-4 text-black' type="text" name='title'  placeholder='Post Tile' />
                             <textarea onBlur={blur} onChange={handleChange} value={post.body} className='textarea w-full text-black' name="body" id="" placeholder='Post Content' cols="30" rows="10"></textarea>

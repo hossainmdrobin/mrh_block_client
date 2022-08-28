@@ -26,7 +26,7 @@ const CreatePost = ({response, setResponse}) => {
                     <textarea onBlur={blur} className='textarea w-full bg-gray-200 mt-4' placeholder='Post Body' name="body" id="postBody" cols="30" rows="5"></textarea>
                     <div className="flex justify-center">
                         {!loading && <input type="submit" value='Post' className='btn w-full mt-2' />}
-                        {loading && <button class="btn w-full mt-2 loading">Please wait...</button>}
+                        {loading && <button className="btn w-full mt-2 loading">Please wait...</button>}
                     </div>
                     {response && <p className="text-success mt-2 text-xl">{response.message}</p>}
                 </form>
