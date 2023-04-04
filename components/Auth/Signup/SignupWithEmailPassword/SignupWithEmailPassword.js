@@ -15,28 +15,26 @@ const SignupWithEmailPassword = () => {
     const blur = (e) => {
         handleBlur(e, user, setUser)
     }
-
     const handleSubmit = (e) => {
-        fetch("https://mrhblog.herokuapp.com/auth/signup",
-            {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify(user)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data) {
-                    console.log(data)
-                    localStorage.setItem('token', data.accessToken)
-                    localStorage.setItem('login', 'true')
-                    router.push(`/create_profile/${data.userId}`)
-                }
-            })
-            .catch((res) => res.json())
-            .then(err => setError({ ...error, err }))
+        fetch(`http://localhost:5000/auth/signup`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              console.log(data);
+              localStorage.setItem("token", data.accessToken);
+              localStorage.setItem("login", "true");
+              router.push(`/create_profile/${data.userId}`);
+            }
+          })
+          .catch((res) => res.json())
+          .then((err) => setError({ ...error, err }));
         e.preventDefault()
     }
 
