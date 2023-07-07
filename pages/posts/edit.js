@@ -3,6 +3,7 @@ import EditPostSingle from "../../components/editPostSingle/EditPostSingle";
 import Header from "../../components/Header/Header";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
 import getFunction from "../../functions/getFunction";
+import { getBaseUrl } from "../../config";
 
 const EditPost = () => {
   const [posts, setPosts] = useState([]);
