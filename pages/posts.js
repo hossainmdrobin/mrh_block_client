@@ -3,6 +3,7 @@ import FriendList from "../components/FriendList/FriendList";
 import Navbar from "../components/Header/Navbar/Navbar";
 import Post from "../components/Posts/Post";
 import PostSidebar from "../components/PostSidebar/PostSidebar";
+import { getBaseUrl } from "../config";
 import getFunction from "../functions/getFunction";
 
 const Posts = ({ posts }) => {

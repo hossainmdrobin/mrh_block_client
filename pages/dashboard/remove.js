@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import getFunction from "../../functions/getFunction";
 import DashboardSidebar from "../../components/Dashboard/DashboardSidebar";
 import RemoveFriendCard from "../../components/AddedFriendCard/RemoveFriendCard/RemoveFriendCard";
+import { getBaseUrl } from "../../config";
 
 const Remove = () => {
   const [deleteRes, setDeleteRes] = useState({});

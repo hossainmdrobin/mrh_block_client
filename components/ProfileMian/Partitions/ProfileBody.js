@@ -3,6 +3,7 @@ import getFunction from "../../../functions/getFunction";
 import CreatePost from "../../CreatePost/CreatePost";
 import Post from "../../Posts/Post";
 import ProfileInfo from "../EditProfileContent/ProfileInfo";
+import { getBaseUrl } from "../../../config";
 
 const ProfileBody = ({ profileDetail }) => {
   const [posts, setPost] = useState([]);
