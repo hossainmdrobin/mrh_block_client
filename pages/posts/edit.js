@@ -7,7 +7,7 @@ import getFunction from "../../functions/getFunction";
 const EditPost = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    const url = "http://localhost:5000/post";
+    const url = `${getBaseUrl()}/post`;
     getFunction(url, setPosts);
   }, [posts]);
   return (

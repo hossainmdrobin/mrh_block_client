@@ -3,11 +3,12 @@ import Post from "../../components/Posts/Post";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
 import Header from "./../../components/Header/Header";
 import getFunction from "../../functions/getFunction";
+import { getBaseUrl } from "../../config";
 const Myposts = () => {
   const [posts, setPost] = useState([]);
 
   useEffect(() => {
-    getFunction("http://localhost:5000/post", setPost);
+    getFunction(`${getBaseUrl()}/post`, setPost);
   }, [posts]);
   return (
     <>

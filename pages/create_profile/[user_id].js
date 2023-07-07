@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/outline";
 import handleBlur from "../../functions/handleBlur";
 import { useRouter } from "next/router";
+import { getBaseUrl } from "../../config";
 
 const CreateProfile = () => {
   const [profilePic, setProfilePic] = useState({});
@@ -35,7 +36,7 @@ const CreateProfile = () => {
     Object.keys(profile).map((p) => {
       profileInfo.append(p, profile[p]);
     });
-    fetch("http://localhost:5000/profile", {
+    fetch(`${getBaseUrl()}/profile`, {
       body: profileInfo,
       method: "POST",
     })

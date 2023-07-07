@@ -1,17 +1,18 @@
 import { BookmarkIcon, TrashIcon } from "@heroicons/react/outline";
 import React, { useState, useEffect } from "react";
 import getFunction from "../../../functions/getFunction";
+import { getBaseUrl } from "../../../config";
 
 const PostHeader = ({ post }) => {
   const [response, setResponse] = useState({});
   const deletePost = () => {
-    const url = `http://localhost:5000/post/delete/${post._id}`;
+    const url = `${getBaseUrl()}/post/delete/${post._id}`;
     getFunction(url, setResponse);
   };
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
-    const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`;
+    const url = `${getBaseUrl()}/profile/getProfileByUserId/${post.author}`;
     getFunction(url, setProfile);
   }, [profile]);
   return (

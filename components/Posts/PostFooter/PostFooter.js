@@ -3,6 +3,7 @@ import handleBlur from "../../../functions/handleBlur";
 import postFunction from "../../../functions/postFunction";
 import { ThumbUpIcon } from "@heroicons/react/solid";
 import Comments from "./comments";
+import { getBaseUrl } from "../../../config";
 
 const PostFooter = ({ post }) => {
   const [comment, setComment] = useState({});
@@ -13,7 +14,7 @@ const PostFooter = ({ post }) => {
   };
 
   const handleSubmit = (e) => {
-    const url = `http://localhost:5000/comment/add/${post._id}`;
+    const url = `${getBaseUrl()}/comment/add/${post._id}`;
     postFunction(url, comment, setComment, setLoading);
     e.preventDefault();
   };

@@ -1,17 +1,18 @@
 import { BookmarkIcon } from "@heroicons/react/outline";
 import React, { useState, useEffect } from "react";
 import getFunction from "../../../functions/getFunction";
+import { getBaseUrl } from "../../../config";
 
 const PostHeader = ({ post }) => {
   const [response, setResponse] = useState({});
   const [profile, setProfile] = useState({});
 
   const addBookmark = () => {
-    const url = `http://localhost:5000/post/bookmark/${post._id}`;
+    const url = `${getBaseUrl()}/post/bookmark/${post._id}`;
     getFunction(url, setResponse);
   };
   useEffect(() => {
-    const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`;
+    const url = `${getBaseUrl()}/profile/getProfileByUserId/${post.author}`;
     getFunction(url, setProfile);
   }, [profile]);
 

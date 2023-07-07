@@ -3,11 +3,12 @@ import DeletePostSingle from "../../components/deletePost/DeletePostSingle";
 import Header from "../../components/Header/Header";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
 import getFunction from "../../functions/getFunction";
+import { getBaseUrl } from "../../config";
 
 const DeletePost = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    const url = "http://localhost:5000/post";
+    const url = `${getBaseUrl()}/post`;
     getFunction(url, setPosts);
   }, [posts]);
 

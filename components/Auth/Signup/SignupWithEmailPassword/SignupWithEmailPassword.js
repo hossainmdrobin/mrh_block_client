@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import handleBlur from '../../../../functions/handleBlur';
 import { useRouter } from 'next/router'
+import { getBaseUrl } from '../../../../config';
 
 const SignupWithEmailPassword = () => {
     const router = useRouter()
@@ -16,7 +17,7 @@ const SignupWithEmailPassword = () => {
         handleBlur(e, user, setUser)
     }
     const handleSubmit = (e) => {
-        fetch(`http://localhost:5000/auth/signup`, {
+        fetch(`${getBaseUrl()}/auth/signup`, {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

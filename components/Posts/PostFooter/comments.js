@@ -5,12 +5,12 @@ const Comments = ({ comment }) => {
   const [loadComment, setloadComment] = useState({});
   const [user, setUser] = useState({});
   useEffect(() => {
-    const url = `http://localhost:5000/comment/get/${comment}`;
+    const url = `${getBaseUrl()}/comment/get/${comment}`;
     getFunction(url, setloadComment);
   }, [loadComment]);
 
   useEffect(() => {
-    const url = `http://localhost:5000/profile/getProfileByUserId/${loadComment.user}`;
+    const url = `${getBaseUrl()}/profile/getProfileByUserId/${loadComment.user}`;
     getFunction(url, setUser);
   }, [user]);
   return (

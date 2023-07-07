@@ -8,7 +8,7 @@ const Remove = () => {
   const [profile, setProfile] = useState({});
   const [friends, setFriends] = useState([]);
   useEffect(() => {
-    const url = "http://localhost:5000/profile/getProfileById";
+    const url = `${getBaseUrl()}/profile/getProfileById`;
     getFunction(url, setProfile);
   }, [deleteRes]);
   useEffect(() => {

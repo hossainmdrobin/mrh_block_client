@@ -4,6 +4,7 @@ import Header from "../components/Header/Header";
 import ProfileBody from "../components/ProfileMian/Partitions/ProfileBody";
 import ProfileHeader from "../components/ProfileMian/Partitions/ProfileHeader";
 import { useRouter } from "next/router";
+import { getBaseUrl } from "../config";
 
 export default function Home() {
   const [profileDetail, setProfileDetail] = useState({});
@@ -13,7 +14,7 @@ export default function Home() {
     if (!token) {
       router.push("/auth/login");
     }
-    fetch("http://localhost:5000/profile", {
+    fetch(`${getBaseUrl()}/profile`, {
       headers: {
         Authorization: "Bearer " + token,
       },
