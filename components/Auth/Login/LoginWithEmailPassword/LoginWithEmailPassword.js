@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import handleBlur from "../../../../functions/handleBlur";
 import { useRouter } from "next/dist/client/router";
 import { getBaseUrl } from "../../../../config";
-const LoginWithEmailPassword = () => {
+const LoginWithEmailPassword = () => { 
+  console.log(getBaseUrl()) 
   const [loginUser, setLoginUser] = useState({ email: "", password: "" });
   const [err, setErr] = useState({});
   const router = useRouter();

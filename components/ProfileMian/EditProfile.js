@@ -81,13 +81,13 @@ const EditProfile = ({ profileDetail }) => {
         {!editProfilePic && (
           <div className="flex items-center justify-center mb-2">
             <span className="rounded-full">
-              <Image
+              {/* <Image
                 src={`${getBaseUrl()}/${profileDetail.profilePic}`}
                 style={roundImg}
                 height={150}
                 width={150}
                 alt="profilepic"
-              />
+              /> */}
             </span>
           </div>
         )}
@@ -95,7 +95,7 @@ const EditProfile = ({ profileDetail }) => {
           <div>
             <div className="flex items-center justify-center mb-2">
               <span className="rounded-full">
-                <Image
+                {/* <Image
                   src={
                     image
                       ? image
@@ -105,7 +105,7 @@ const EditProfile = ({ profileDetail }) => {
                   height={150}
                   width={150}
                   alt="profilepic"
-                />
+                /> */}
               </span>
             </div>
             <form onSubmit={handleSubmit} className="my-8">

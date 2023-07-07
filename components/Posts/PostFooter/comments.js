@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getFunction from "../../../functions/getFunction";
+import { getBaseUrl } from "../../../config";
 
 const Comments = ({ comment }) => {
   const [loadComment, setloadComment] = useState({});
