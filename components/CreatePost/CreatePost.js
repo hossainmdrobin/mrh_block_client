@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import handleBlur from "../../functions/handleBlur";
 import postFunction from "../../functions/postFunction";
+import { getBaseUrl } from "../../config";
 
 const CreatePost = ({ response, setResponse }) => {
   const [post, setPost] = useState({});
@@ -11,7 +12,7 @@ const CreatePost = ({ response, setResponse }) => {
   };
 
   const handleSubmit = (e) => {
-    postFunction("http://localhost:5000/post", post, setResponse, setLoading);
+    postFunction(`${getBaseUrl()}/post`, post, setResponse, setLoading);
     e.preventDefault();
   };
 

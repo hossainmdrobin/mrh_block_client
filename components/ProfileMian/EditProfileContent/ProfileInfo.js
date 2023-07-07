@@ -20,19 +20,19 @@ const ProfileInfo = ({profileDetail}) => {
                 <div className="w-8">
                     <GlobeAltIcon className='h-8 text-gray-400' />
                 </div>
-                <p className='ml-2 text-gray-500'>{profileDetail.website}</p>
+                <p className='ml-2 text-gray-500'>{profileDetail?.website?.slice(0,40)}</p>
             </div>
             <div className="flex items-center py-2">
                 <div className="w-8">
                     <GlobeAltIcon className='h-8 text-gray-400' />
                 </div>
-                <p className='ml-2 text-gray-500'>{profileDetail.twitter}</p>
+                <p className='ml-2 text-gray-500'>{profileDetail?.twitter?.slice(0,40)}</p>
             </div>
             <div className="flex items-center py-2">
                 <div className="w-8">
                     <GlobeAltIcon className='h-8 text-gray-400' />
                 </div>
-                <p className='ml-2 text-gray-500'>{profileDetail.github}</p>
+                <p className='ml-2 text-gray-500'>{profileDetail.github?.slice(0,40)}</p>
             </div>
             <div className="flex items-center py-2">
                 <div className="w-8">

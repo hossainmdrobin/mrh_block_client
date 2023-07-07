@@ -5,6 +5,7 @@ import { PencilIcon } from "@heroicons/react/solid";
 import ProfileNavigation from "../profileNavigation";
 import EditProfile from "../EditProfile";
 import { XIcon } from "@heroicons/react/outline";
+import { getBaseUrl } from "../../../config";
 
 const ProfileHeader = ({ profileDetail }) => {
   const divStyle = {
@@ -32,7 +33,7 @@ const ProfileHeader = ({ profileDetail }) => {
                 style={divStyle}
                 src={
                   profileDetail.profilePic
-                    ? `http://localhost:5000/${profileDetail.profilePic}`
+                    ? `${getBaseUrl()}/${profileDetail.profilePic}`
                     : coverpic
                 }
                 height={200}

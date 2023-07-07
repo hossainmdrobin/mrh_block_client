@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import getFunction from "../../../functions/getFunction";
+import { getBaseUrl } from "../../../config";
 
 const RemoveFriendCard = ({ friend, deleteRes, setDeleteRes }) => {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
-    const url = `http://localhost:5000/profile/getFriendsProfileById/${friend}`;
+    const url = `${getBaseUrl()}/profile/getFriendsProfileById/${friend}`;
     getFunction(url, setProfile);
   }, [profile]);
 
   const removeProfile = () => {
-    const url = `http://localhost:5000/profile/deleteFriend/${friend}`;
+    const url = `${getBaseUrl()}/profile/deleteFriend/${friend}`;
     getFunction(url, setDeleteRes);
   };
   return (
@@ -18,7 +19,7 @@ const RemoveFriendCard = ({ friend, deleteRes, setDeleteRes }) => {
       <div style={{ maxHeight: "500px" }} className="flex justify-center">
         <img
           className="h-64"
-          src={`http://localhost:5000/${profile.profilePic}`}
+          src={`${getBaseUrl()}/${profile.profilePic}`}
           alt="Profilepic"
         />
       </div>

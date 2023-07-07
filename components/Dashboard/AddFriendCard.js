@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import getFunction from "../../functions/getFunction";
 import Image from "next/image";
+import { getBaseUrl } from "../../config";
 
 const AddFriendCard = ({ friend }) => {
   const [response, setResponse] = useState({});
   const addFriend = () => {
-    const url = `http://localhost:5000/profile/addFriend/${friend._id}`;
+    const url = `${getBaseUrl()}/profile/addFriend/${friend._id}`;
     getFunction(url, setResponse);
   };
 
@@ -14,7 +15,7 @@ const AddFriendCard = ({ friend }) => {
       <div style={{ maxHeight: "500px" }} className="flex justify-center">
         <img
           className="h-64"
-          src={`http://localhost:5000/${friend.profilePic}`}
+          src={`${getBaseUrl()}/${friend.profilePic}`}
           alt="profile pic"
         />
       </div>

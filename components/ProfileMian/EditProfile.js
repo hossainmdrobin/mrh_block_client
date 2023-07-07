@@ -5,6 +5,7 @@ import { PencilAltIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import handleBlur from "./../../functions/handleBlur";
 import postFunction from "../../functions/postFunction";
+import { getBaseUrl } from "../../config";
 
 const EditProfile = ({ profileDetail }) => {
   const [editProfilePic, setEditProfilePic] = useState(false);
@@ -31,7 +32,7 @@ const EditProfile = ({ profileDetail }) => {
     const token = localStorage.getItem("token");
     let profileInfo = new FormData();
     profileInfo.append("profilePic", profilePic);
-    fetch("http://localhost:5000/profile/updateProfilePic", {
+    fetch(`${getBaseUrl()}/profile/updateProfilePic`, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -56,7 +57,7 @@ const EditProfile = ({ profileDetail }) => {
   // SUBMITTING PROFILE DETAIL TO BACKEND
   const [detailResponse, setDetailResponse] = useState({});
   const submitDetail = (e) => {
-    const url = "http://localhost:5000/profile/updateDetail";
+    const url = `${getBaseUrl()}/profile/updateDetail`;
     postFunction(url, detail, setDetailResponse, setLoading);
     e.preventDefault();
   };
@@ -81,7 +82,7 @@ const EditProfile = ({ profileDetail }) => {
           <div className="flex items-center justify-center mb-2">
             <span className="rounded-full">
               <Image
-                src={`http://localhost:5000/${profileDetail.profilePic}`}
+                src={`${getBaseUrl()}/${profileDetail.profilePic}`}
                 style={roundImg}
                 height={150}
                 width={150}
@@ -98,7 +99,7 @@ const EditProfile = ({ profileDetail }) => {
                   src={
                     image
                       ? image
-                      : `http://localhost:5000/${profileDetail.profilePic}`
+                      : `${getBaseUrl()}/${profileDetail.profilePic}`
                   }
                   style={roundImg}
                   height={150}

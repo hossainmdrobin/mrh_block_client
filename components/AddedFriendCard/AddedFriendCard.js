@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import getFunction from "../../functions/getFunction";
+import { getBaseUrl } from "../../config";
 const AddedFriendCard = ({ friend }) => {
   const [profile, setProfile] = useState({});
   useEffect(() => {
-    const url = `http://localhost:5000/profile/getFriendsProfileById/${friend}`;
+    const url = `${getBaseUrl()}/profile/getFriendsProfileById/${friend}`;
     getFunction(url, setProfile);
   }, [profile]);
 
@@ -12,7 +13,7 @@ const AddedFriendCard = ({ friend }) => {
       <div style={{ maxHeight: "500px" }} className="flex justify-center">
         <img
           className="h-64"
-          src={`http://localhost:5000/${profile.profilePic}`}
+          src={`${getBaseUrl()}/${profile.profilePic}`}
           alt="profilePic"
         />
       </div>

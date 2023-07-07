@@ -2,13 +2,14 @@ import { PencilAltIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import getFunction from "../../../functions/getFunction";
+import { getBaseUrl } from "../../../config";
 
 const PostHeader = ({ post }) => {
   const [profile, setProfile] = useState({});
 
   const router = useRouter();
   useEffect(() => {
-    const url = `http://localhost:5000/profile/getProfileByUserId/${post.author}`;
+    const url = `${getBaseUrl()}/profile/getProfileByUserId/${post.author}`;
     getFunction(url, setProfile);
   }, [profile]);
 

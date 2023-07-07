@@ -3,6 +3,7 @@ import AddFriendCard from "../components/Dashboard/AddFriendCard";
 import DashboardSidebar from "../components/Dashboard/DashboardSidebar";
 import getFunction from "../functions/getFunction";
 import { useRouter } from "next/dist/client/router";
+import { getBaseUrl } from "../config";
 
 const Dashboard = () => {
   const [addFriends, setAddFriends] = useState([]);
@@ -12,7 +13,7 @@ const Dashboard = () => {
     if (!token) {
       router.push("/auth/login");
     }
-    const url = `http://localhost:5000/profile/getUnaddedProfile`;
+    const url = `${getBaseUrl()}/profile/getUnaddedProfile`;
     getFunction(url, setAddFriends);
   }, [addFriends]);
 

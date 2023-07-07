@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost','mrhblog.herokuapp.com'],
+    domains: ['localhost','mrh-blog-server.vercel.app'],
   }
 }
 

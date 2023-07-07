@@ -26,7 +26,7 @@ const Posts = ({ posts }) => {
 };
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:5000/post/getAllPost`);
+  const res = await fetch(`${getBaseUrl()}/post/getAllPost`);
   const posts = await res.json();
 
   // Pass data to the page via props

@@ -4,6 +4,7 @@ import getFunction from "../../../functions/getFunction";
 import Header from "../../../components/Header/Header";
 import postFunction from "../../../functions/postFunction";
 import handleBlur from "./../../../functions/handleBlur";
+import { getBaseUrl } from "../../../config";
 
 const PostId = () => {
   const [post, setPost] = useState({});
@@ -12,7 +13,7 @@ const PostId = () => {
   const router = useRouter();
   const id = router.query.postId;
   useEffect(() => {
-    const url = `http://localhost:5000/post/findPostByItsId/${id}`;
+    const url = `${getBaseUrl()}/post/findPostByItsId/${id}`;
     getFunction(url, setPost);
   }, [post]);
 
@@ -27,7 +28,7 @@ const PostId = () => {
   };
 
   const hanldleSubmit = (e) => {
-    const url = `http://localhost:5000/post/update/${id}`;
+    const url = `${getBaseUrl()}/post/update/${id}`;
     postFunction(url, editedPost, setResponse);
     e.preventDefault();
   };
