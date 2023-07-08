@@ -5,11 +5,12 @@ import FriendList from "../../components/FriendList/FriendList";
 import Header from "../../components/Header/Header";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
 import getFunction from "../../functions/getFunction";
+import { getBaseUrl } from "../../config";
 
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
   useEffect(() => {
-    const url = `${getBaseUrl()}/post/getBookmarkedPost`;
+    const url = `/${getBaseUrl()}/post/getBookmarkedPost`;
     getFunction(url, setBookmarks);
   }, [bookmarks]);
 

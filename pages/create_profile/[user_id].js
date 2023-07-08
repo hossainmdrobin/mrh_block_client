@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   UserIcon,
   CameraIcon,
@@ -6,16 +6,18 @@ import {
 } from "@heroicons/react/outline";
 import handleBlur from "../../functions/handleBlur";
 import { useRouter } from "next/router";
-import { getBaseUrl } from "../../config";
+import { useCreateProfileMutation } from "../../Redux/feature/auth/authApi";
 
 const CreateProfile = () => {
   const [profilePic, setProfilePic] = useState({});
   const [image, setImage] = useState();
   const [profile, setProfile] = useState({});
   const router = useRouter();
-  const { user_id } = router.query;
-  const [response, setResponse] = useState({});
-  const [loading, setLoading] = useState(false);
+  const { user_id } = router.query;  
+
+  // REDUX API CALL
+  const [createProfile,{data,isLoading,error}] = useCreateProfileMutation()
+  console.log(data,isLoading, error, "profile data post");
 
   const blur = (e) => {
     handleBlur(e, profile, setProfile);
@@ -36,22 +38,16 @@ const CreateProfile = () => {
     Object.keys(profile).map((p) => {
       profileInfo.append(p, profile[p]);
     });
-    fetch(`${getBaseUrl()}/profile`, {
-      body: profileInfo,
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          console.log(data);
-          setResponse(data);
-          setLoading(false);
-          router.push("/");
-        }
-      })
-      .catch((error) => console.log(error));
+
+    createProfile(profileInfo);    
     e.preventDefault();
   };
+
+  useEffect(()=>{
+    if(data){
+      router.push("/")
+    }
+  })
 
   return (
     <div className="bg-gray-200">
@@ -73,7 +69,7 @@ const CreateProfile = () => {
           <CameraIcon className="h-5 text-white" />
         </label>
       </div>
-      {response && (
+      {error && (
         <div className="flex justify-center items-center">
           <ExclamationCircleIcon className="h-8 text-error" />
           <p className="my-4 text-center text-error">
@@ -143,20 +139,20 @@ const CreateProfile = () => {
             className="input input-success my-4 w-full"
           />
           <div className="flex justify-center my-4 w-full">
-            {!loading && (
+            {!isLoading && (
               <input
                 type="submit"
                 value="Save"
                 className="btn btn-success w-full text-white"
               />
             )}
-            {loading && (
+            {isLoading && (
               <button className="btn btn-success w-full text-white loading">
                 Please wait...
               </button>
             )}
           </div>
-          {response && (
+          {error && (
             <div className="flex justify-center items-center">
               <ExclamationCircleIcon className="h-8 text-error" />
               <p className="my-4 text-center text-error">

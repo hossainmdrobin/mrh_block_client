@@ -40,8 +40,7 @@ const PostId = () => {
   };
 
   return (
-    <>
-      {console.log(response)}
+    <>      
       <Header />
       {response.message && (
         <div className="flex justify-center mt-4">

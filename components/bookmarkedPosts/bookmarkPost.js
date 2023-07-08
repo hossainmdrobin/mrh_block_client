@@ -16,9 +16,7 @@ const BookmarkPost = ({ bookmark }) => {
     getFunction(url, setPosts);
   }, [post]);
   return (
-    <div className="p-4 mx-1">
-      {console.log(bookmark)}
-      {console.log(post)}
+    <div className="p-4 mx-1">    
       <div className="shadow-xl border rounded bg-white">
         <PostHeader post={post} />
         <PostBody post={post} />

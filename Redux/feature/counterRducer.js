@@ -6,8 +6,7 @@ const counterSlice = createSlice({
     name:"counterSlice",
     initialState,
     reducers:{
-        incrementByParameter: (state=initialState,action)=>{
-            console.log(action.payload,"action")
+        incrementByParameter: (state=initialState,action)=>{            
             state += action.payload
             return state;
         },

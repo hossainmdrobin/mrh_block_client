@@ -1,10 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import handleBlur from "../../../../functions/handleBlur";
 import { useRouter } from "next/dist/client/router";
 import { getBaseUrl } from "../../../../config";
-const LoginWithEmailPassword = () => { 
-  console.log(getBaseUrl()) 
+import { useGetAllPostQuery } from "../../../../Redux/feature/post/postApi";
+import { useLoginWithEmailAndPasswordMutation } from "../../../../Redux/feature/auth/authApi";
+const LoginWithEmailPassword = () => {
+  const [loginWithEmailAndPassword, { data, isLoading, error }] =
+    useLoginWithEmailAndPasswordMutation();  
   const [loginUser, setLoginUser] = useState({ email: "", password: "" });
   const [err, setErr] = useState({});
   const router = useRouter();
@@ -13,26 +17,17 @@ const LoginWithEmailPassword = () => {
   };
 
   const handleSubmit = (e) => {
-    fetch(`${getBaseUrl()}/auth/login`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(loginUser),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          localStorage.setItem("token", data.accessToken);
-          localStorage.setItem("login", "true");
-          router.push("/");
-        }
-      })
-      .catch((err) => setErr({ message: "Internal Server Error" }));
-    // .then(err => setErr({message:'server Error'}))
+    loginWithEmailAndPassword(loginUser);    
     e.preventDefault();
   };
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("login", "true");
+      router.push("/");
+    }
+  }, [data]);
   return (
     <div className="flex justify-center w-full">
       <form
@@ -65,7 +60,7 @@ const LoginWithEmailPassword = () => {
         <div className="flex justify-center">
           <input
             type="submit"
-            value="Login"
+            value={isLoading ? "Loading.." : "Login"}
             className="btn btn-ghost hover:shadow-xl normal-case bg-success my-2 text-white"
           />
         </div>

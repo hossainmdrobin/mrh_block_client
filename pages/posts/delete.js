@@ -16,8 +16,7 @@ const DeletePost = () => {
     <div>
       <Header />
       <div className="md:flex w-full">
-        <PostSidebar />
-        {console.log(posts)}
+        <PostSidebar />        
         <div className="md:w-4/5 mt-12 md:mt-0">
           {posts.map((post) => (
             <DeletePostSingle post={post} key={post._id} />

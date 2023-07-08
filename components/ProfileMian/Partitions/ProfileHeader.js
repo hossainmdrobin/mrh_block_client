@@ -42,7 +42,7 @@ const ProfileHeader = ({ profileDetail }) => {
               /> */}
             </div>
             <div className="ml-3">
-              <p className="text-3xl font-bold">{profileDetail.name}</p>
+              <p className="text-3xl font-bold">{profileDetail?.name}</p>
               <p className="font-bold text-gray-400">1222 friends</p>
             </div>
           </div>

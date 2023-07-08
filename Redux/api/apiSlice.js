@@ -5,7 +5,8 @@ import { getBaseUrl } from "../../config"
 const apiSlice = createApi({
     reducerPath:"api",
     baseQuery: fetchBaseQuery({
-        baseUrl:getBaseUrl,
+        // baseUrl:"https://mrh-blog-dev.onrender.com",
+        baseUrl:'http://localhost:5000'
     }),
 
     endpoints:(builder)=>({}),
