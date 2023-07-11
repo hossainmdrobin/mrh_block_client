@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react'
-import getFunction from '../../../functions/getFunction';
 
 const Comments = ({comment}) => {
     

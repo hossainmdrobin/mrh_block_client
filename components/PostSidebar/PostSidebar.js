@@ -14,7 +14,7 @@ const PostSidebar = () => {
     return (
         <div className='relative md:w-1/5'>
             <div style={{ maxHeight: '500px' }} className='w-full md:sticky top-4 mt-4 rounded bg-gray-200'>
-                <PostLink link='/sldkf' title='Recent Posts' Icon={ClipboardListIcon} url='/posts/'/>
+                <PostLink link='/sldkf' title='Recent Posts' Icon={ClipboardListIcon} url='/posts'/>
                 <PostLink link='/sldkf' title='Bookmarks' Icon={StarIcon} url='/posts/bookmarks'/>
                 <PostLink link='/sldkf' title='My Post' Icon={UserIcon} url='/posts/myposts'/>
                 <PostLink link='/sldkf' title='Create Post' Icon={PlusIcon} url='/posts/create' />

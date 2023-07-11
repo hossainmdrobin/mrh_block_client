@@ -4,8 +4,11 @@ import Navbar from "../components/Header/Navbar/Navbar";
 import Post from "../components/Posts/Post";
 import PostSidebar from "../components/PostSidebar/PostSidebar";
 import { getBaseUrl } from "../config";
+import { useGetAllPostQuery } from "../Redux/feature/post/postApi";
 
-const Posts = ({ posts }) => {
+const Posts = ({ }) => {   
+  const {data:posts,isLoading,error}  = useGetAllPostQuery();
+
   return (
     <>
       <Navbar />
@@ -24,13 +27,5 @@ const Posts = ({ posts }) => {
     </>
   );
 };
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`${getBaseUrl()}/post/getAllPost`);
-  const posts = await res.json();
-
-  // Pass data to the page via props
-  return { props: { posts } };
-}
 
 export default Posts;

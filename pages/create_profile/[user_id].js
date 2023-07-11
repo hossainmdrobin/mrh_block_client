@@ -31,23 +31,23 @@ const CreateProfile = () => {
   };
 
   const handleSubmit = (e) => {
-    setLoading(true);
+    e.preventDefault();    
     const profileInfo = new FormData();
-    profileInfo.append("profilePic", profilePic);
+    profileInfo.append("image", profilePic);
     profileInfo.append("user", user_id);
     Object.keys(profile).map((p) => {
       profileInfo.append(p, profile[p]);
     });
 
     createProfile(profileInfo);    
-    e.preventDefault();
+    
   };
 
-  useEffect(()=>{
-    if(data){
-      router.push("/")
-    }
-  })
+  // useEffect(()=>{
+  //   if(data){
+  //     router.push("/")
+  //   }
+  // })
 
   return (
     <div className="bg-gray-200">

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import BookmarkPost from "../../components/bookmarkedPosts/bookmarkPost";
-import CreatePost from "../../components/CreatePost/CreatePost";
-import FriendList from "../../components/FriendList/FriendList";
 import Header from "../../components/Header/Header";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
-import getFunction from "../../functions/getFunction";
-import { getBaseUrl } from "../../config";
+import { useGetBookmarkedPostQuery } from "../../Redux/feature/post/postApi";
+import Post from "../../components/Posts/Post";
 
 const Bookmarks = () => {
-  const [bookmarks, setBookmarks] = useState([]);
-  useEffect(() => {
-    const url = `/${getBaseUrl()}/post/getBookmarkedPost`;
-    getFunction(url, setBookmarks);
-  }, [bookmarks]);
+  // const [bookmarks, setBookmarks] = useState([]);
+  const {data:bookmarks, isLoading, error} = useGetBookmarkedPostQuery()
+  console.log(bookmarks, isLoading, error)  
 
   return (
     <>
@@ -21,8 +16,8 @@ const Bookmarks = () => {
         <PostSidebar />
 
         <div className="md:w-4/5 mt-12 md:mt-0">
-          {bookmarks.map((b, i) => (
-            <BookmarkPost bookmark={b} key={i} />
+          {bookmarks?.map((post, i) => (
+            <Post {...{post}} key={post._id} />
           ))}
         </div>
       </div>

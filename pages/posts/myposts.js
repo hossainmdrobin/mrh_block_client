@@ -2,14 +2,9 @@ import React, { useState, useEffect } from "react";
 import Post from "../../components/Posts/Post";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
 import Header from "./../../components/Header/Header";
-import getFunction from "../../functions/getFunction";
-import { getBaseUrl } from "../../config";
 const Myposts = () => {
-  const [posts, setPost] = useState([]);
+  const {data:posts, isLoading, error} = useGetMyPostQuery();  
 
-  useEffect(() => {
-    getFunction(`${getBaseUrl()}/post`, setPost);
-  }, [posts]);
   return (
     <>
       <Header />

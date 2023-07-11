@@ -10,7 +10,7 @@ const apiSlice = createApi({
     }),
 
     endpoints:(builder)=>({}),
-    tagTypes: []
+    tagTypes: ['allPost','myPost']
 
 })
 

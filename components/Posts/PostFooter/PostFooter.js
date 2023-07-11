@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import handleBlur from "../../../functions/handleBlur";
-import postFunction from "../../../functions/postFunction";
+import handleBlur from "../../../functions/handleBlur"
 import { ThumbUpIcon } from "@heroicons/react/solid";
 import Comments from "./comments";
-import { getBaseUrl } from "../../../config";
+import { useCreateCommentMutation } from "../../../Redux/feature/post/postApi";
 
 const PostFooter = ({ post }) => {
-  const [comment, setComment] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [comment, setComment] = useState({});  
+  // redux api
+  const [createComment,{isLoading}] = useCreateCommentMutation()
 
   const blur = (e) => {
-    handleBlur(e, comment, setComment);
+    handleBlur(e, comment, setComment);        
   };
 
   const handleSubmit = (e) => {
-    const url = `${getBaseUrl()}/comment/add/${post._id}`;
-    postFunction(url, comment, setComment, setLoading);
     e.preventDefault();
+    if(!comment){
+      return
+    }
+    createComment({data:comment,id:post?._id})
   };
 
   return (
@@ -31,7 +33,7 @@ const PostFooter = ({ post }) => {
         {post.comments && <div>{post.comments.length} comments</div>}
       </div>
       <div className="my-4 flex justify-center items-center">
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={(handleSubmit)} className="w-full">
           <textarea
             onBlur={blur}
             className="w-full textarea mb-2"
@@ -42,8 +44,8 @@ const PostFooter = ({ post }) => {
             rows="3"
           ></textarea>
           <br />
-          {!loading && <input type="submit" value="Comment" className="btn" />}
-          {loading && <button className="btn loading ">Please Wait...</button>}
+          {!isLoading && <input type="submit" value="Comment" className="btn" />}
+          {isLoading && <button className="btn loading ">Please Wait...</button>}
         </form>
       </div>
       {post.comments &&

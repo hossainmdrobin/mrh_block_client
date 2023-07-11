@@ -5,14 +5,10 @@ import Post from "../../Posts/Post";
 import ProfileInfo from "../EditProfileContent/ProfileInfo";
 import { useGetMyPostQuery } from "../../../Redux/feature/post/postApi";
 
-const ProfileBody = ({ profileDetail }) => {
-  const [posts, setPost] = useState([]);
+const ProfileBody = ({ profileDetail }) => {  
   const [response, setResponse] = useState();
-  const {data, isLoading, error} = useGetMyPostQuery();  
-
-  useEffect(() => {
-    setPost(data)
-  }, [data]);
+  const {data:posts, isLoading, error} = useGetMyPostQuery();  
+  
   return (
     <div className="flex justify-center items-center bg-gray-200">
       <div style={{ maxWidth: "950px" }} className="w-full md:flex">

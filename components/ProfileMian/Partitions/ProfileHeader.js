@@ -8,6 +8,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { getBaseUrl } from "../../../config";
 
 const ProfileHeader = ({ profileDetail }) => {
+  console.log(profileDetail);
   const divStyle = {
     color: "blue",
     borderRadius: "50%",
@@ -16,12 +17,12 @@ const ProfileHeader = ({ profileDetail }) => {
     <div className="w-full flex flex-col items-center justify-center mt-4">
       <div style={{ maxWidth: "950px" }}>
         <div>
-          {/* <Image
+          <Image
             src={coverpic}
             height={1800}
             className="rounded-xl"
             alt="profile"
-          /> */}
+          />
         </div>
         <div className="md:flex justify-between items-center  relative -top-12">
           <div className="md:flex items-center">
@@ -29,17 +30,13 @@ const ProfileHeader = ({ profileDetail }) => {
               style={{ height: "205px", width: "205px" }}
               className="rounded-full bg-white flex items-center justify-center"
             >
-              {/* <Image
+              <Image
                 style={divStyle}
-                src={
-                  profileDetail.profilePic
-                    ? `${getBaseUrl()}/${profileDetail.profilePic}`
-                    : coverpic
-                }
+                src={profileDetail?.profilePic}
                 height={200}
                 width={200}
                 alt="profile"
-              /> */}
+              />
             </div>
             <div className="ml-3">
               <p className="text-3xl font-bold">{profileDetail?.name}</p>
