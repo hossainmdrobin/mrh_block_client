@@ -24,7 +24,7 @@ const PostId = () => {
   const handleChange = (e) => {
     const newPost = { post };
     newPost[e.target.name] = e.target.value;
-    setPost(newPost);
+    setEditedPost(newPost);
   };
 
   return (

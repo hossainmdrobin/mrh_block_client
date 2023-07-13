@@ -14,6 +14,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
+      providesTags: ["bookmarks"],
     }),
     getSinglePost: builder.query({
       query: (id) => `/post/findPostByItsId/${id}`,
@@ -28,7 +29,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
-      invalidatesTags: ["allPost", "myPost"],
+      invalidatesTags: ["allPost", "myPost","bookmarks"],
     }),
     bookmarkPost: builder.mutation({
       query: (id) => ({
@@ -38,7 +39,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
-      invalidatesTags: ["allPost", "myPost"],
+      invalidatesTags: ["allPost", "myPost","bookmarks"],
     }),
     updatePost: builder.mutation({
       query: ({ data, id }) => ({
@@ -49,7 +50,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
-      invalidatesTags: ["allPost", "myPost"],
+      invalidatesTags: ["allPost", "myPost","bookmarks"],
     }),
     deletePost: builder.mutation({
       query: (id) => ({
@@ -68,7 +69,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
-      providesTags: ["myPost"],
+      invalidatesTags: ["allPost", "myPost","bookmarks"],
     }),
 
     // COMMENTS
@@ -81,6 +82,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
+      invalidatesTags: ["allPost", "myPost","bookmarks"],
     }),
   }),
 });

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
 import Post from "../../components/Posts/Post";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
+import { useGetMyPostQuery } from "../../Redux/feature/post/postApi";
 import Header from "./../../components/Header/Header";
 const Myposts = () => {
   const {data:posts, isLoading, error} = useGetMyPostQuery();  
+  console.log(posts,"my post")
 
   return (
     <>

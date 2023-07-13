@@ -14,7 +14,7 @@ const Posts = ({ }) => {
       <Navbar />
       <div className="md:flex w-full">
         <PostSidebar />
-        <div className="md:w-3/5 mt-12 md:mt-0">
+        <div className="md:w-2/4 mt-12 md:mt-0">
           <CreatePost />
           {posts ? (
             posts.map((post) => <Post post={post} key={post._id} />)
