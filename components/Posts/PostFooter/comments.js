@@ -18,8 +18,8 @@ const Comments = ({ comment }) => {
         />
       </div>
       <div className="ml-2">        
-        <p className="font-bold">{comment?.user?.username}</p>
-        <p className="text-gray-500">{comment?.body}</p>
+        <p className="font-semibold text-sm">{comment?.user?.username}</p>
+        <p className="text-gray-500 text-sm">{comment?.body}</p>
         <p className="text-xs text-gray-400">{timeAgo(comment?.createdAt)}</p>
       </div>
     </div>

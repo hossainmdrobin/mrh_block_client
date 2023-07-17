@@ -3,7 +3,7 @@ import Image from "next/image";
 import jwt_decode from "jwt-decode";
 import { BookmarkIcon } from "@heroicons/react/outline";
 import { AiOutlineMore, AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { useBookmarkPostMutation } from "../../../Redux/feature/post/postApi";
+import { useBookmarkPostMutation, useDeletePostMutation } from "../../../Redux/feature/post/postApi";
 import timeAgo from "../../../Utils/monent";
 import defaultUser from "./../../../Images/defaultuser.png"
 import { useRouter } from "next/router";
@@ -14,8 +14,11 @@ import { useRouter } from "next/router";
 const PostHeader = ({ post, data }) => {  
   const router = useRouter()
   const [bookMarked, setBookMarked] = useState(false);
+  // redux api
   const [bookmark, { data: bookmarkData, isLoading }] =
     useBookmarkPostMutation();
+    const [deletePost, {data:delData, isLaoding:delLoading, error:delError}] = useDeletePostMutation();
+
 
   // JS variables
   const profilePic = post?.author?.profile?.profilePic || defaultUser;
@@ -26,6 +29,9 @@ const PostHeader = ({ post, data }) => {
   const addBookmark = () => {
     bookmark(post?._id);
   };
+  const delPost = () => {
+    deletePost(post._id);
+  }
 
   useEffect(() => {
     if (bookmarkData) {
@@ -69,9 +75,9 @@ const PostHeader = ({ post, data }) => {
       )}
       {decoded._id === post?.author?._id && (
         <div className="relative group">
-          <AiOutlineMore className="font-bold shadow hover:shadow-xl w-8 h-8 p-1 rounded-full bg-white" />
-          <AiFillEdit onClick={()=>router.push(`/posts/edit/${post?._id}`)} className="absolute top-20 group-hover:right-0 duration-300 delay-75 -right-12 w-8 h-8 p-1.5 bg-warning rounded-full text-white" />
-          <AiFillDelete className="absolute top-10 group-hover:right-0 duration-300 delay-300 -right-12 w-8 h-8 p-1.5 bg-error rounded-full text-white" />
+          <AiOutlineMore className="font-bold shadow hover:shadow-xl w-6 h-6 p-1 rounded-full bg-white" />
+          <AiFillEdit onClick={()=>router.push(`/posts/edit/${post?._id}`)} className="absolute top-20 group-hover:right-0 duration-300 delay-75 -right-12 w-6 h-6 p-1 bg-warning rounded-full text-white" />
+          <AiFillDelete onClick={delPost} className="absolute top-10 group-hover:right-0 duration-300 delay-300 -right-12 w-6 h-6 p-1 bg-error rounded-full text-white" />
         </div>
       )}
     </div>

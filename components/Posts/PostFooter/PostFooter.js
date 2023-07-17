@@ -39,11 +39,11 @@ const PostFooter = ({ post, data }) => {
       <div className="flex justify-between">
         {post.likes && (
           <div className="flex justify-center items-center">
-            <ThumbUpIcon className="h-6 mr-1 hover:text-success cursor-pointer" />
+            <ThumbUpIcon className="h-6 mr-1 text-gray-400 hover:text-success cursor-pointer" />
             <p>{post.likes.length}</p>
           </div>
         )}
-        {post?.comments && <div>{post?.comments?.length} comments</div>}
+        {post?.comments && <div className="text-sm text-gray-400">{post?.comments?.length} comments</div>}
       </div>
       {page !== 1 && (
         <p

@@ -60,6 +60,7 @@ export const postApi = apiSlice.injectEndpoints({
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
+      invalidatesTags: ["allPost", "myPost","bookmarks"],
     }),
     getMyPost: builder.query({
       query: () => ({
