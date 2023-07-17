@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import moment from 'moment';
 import EditPostSingle from "../../components/editPostSingle/EditPostSingle";
 import Header from "../../components/Header/Header";
 import PostSidebar from "../../components/PostSidebar/PostSidebar";
-import getFunction from "../../functions/getFunction";
-import { getBaseUrl } from "../../config";
+import { useGetMyPostQuery } from "../../Redux/feature/post/postApi";
 
-const EditPost = () => {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const url = `${getBaseUrl()}/post`;
-    getFunction(url, setPosts);
-  }, [posts]);
+
+const EditPost = () => {  
+  const {data:posts, isLoading, error} = useGetMyPostQuery();  
   return (
     <div>
       <Header />
       <div className="md:flex w-full">
         <PostSidebar />
         <div className="md:w-4/5 mt-12 md:mt-0">
-          {posts.map((post, i) => (
+          {posts?.map((post, i) => (
             <EditPostSingle post={post} key={i} />
           ))}
         </div>

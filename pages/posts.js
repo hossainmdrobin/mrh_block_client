@@ -3,16 +3,25 @@ import FriendList from "../components/FriendList/FriendList";
 import Navbar from "../components/Header/Navbar/Navbar";
 import Post from "../components/Posts/Post";
 import PostSidebar from "../components/PostSidebar/PostSidebar";
-import { getBaseUrl } from "../config";
-import getFunction from "../functions/getFunction";
+import PostLoader from "../components/shared/loaders/postLoader";
+import { useGetAllPostQuery } from "../Redux/feature/post/postApi";
 
-const Posts = ({ posts }) => {
+const Posts = ({}) => {
+  const { data: posts, isLoading, error } = useGetAllPostQuery();
+
   return (
     <>
       <Navbar />
       <div className="md:flex w-full">
         <PostSidebar />
-        <div className="md:w-3/5 mt-12 md:mt-0">
+        <div className="md:w-2/4 mt-12 md:mt-0">
+          {isLoading && (
+            <div>
+              <PostLoader />
+              <PostLoader />
+              <PostLoader />
+            </div>
+          )}
           <CreatePost />
           {posts ? (
             posts.map((post) => <Post post={post} key={post._id} />)
@@ -25,13 +34,5 @@ const Posts = ({ posts }) => {
     </>
   );
 };
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`${getBaseUrl()}/post/getAllPost`);
-  const posts = await res.json();
-
-  // Pass data to the page via props
-  return { props: { posts } };
-}
 
 export default Posts;

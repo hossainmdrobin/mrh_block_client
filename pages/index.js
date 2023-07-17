@@ -5,24 +5,18 @@ import ProfileBody from "../components/ProfileMian/Partitions/ProfileBody";
 import ProfileHeader from "../components/ProfileMian/Partitions/ProfileHeader";
 import { useRouter } from "next/router";
 import { getBaseUrl } from "../config";
+import { useGetProfileQuery } from "../Redux/feature/auth/authApi";
 
 export default function Home() {
   const [profileDetail, setProfileDetail] = useState({});
+  const {data, isLoading, error} = useGetProfileQuery();  
   const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       router.push("/auth/login");
-    }
-    fetch(`${getBaseUrl()}/profile`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setProfileDetail(data))
-      .catch((err) => console.log(err));
-  }, [profileDetail]);
+    }    
+  }, [router]);
   return (
     <div>
       <Head>
@@ -31,8 +25,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <ProfileHeader profileDetail={profileDetail} />
-      <ProfileBody profileDetail={profileDetail} />
+      <ProfileHeader profileDetail={data} />
+      <ProfileBody profileDetail={data} />
     </div>
   );
 }

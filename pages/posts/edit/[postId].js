@@ -1,49 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import getFunction from "../../../functions/getFunction";
 import Header from "../../../components/Header/Header";
-import postFunction from "../../../functions/postFunction";
 import handleBlur from "./../../../functions/handleBlur";
-import { getBaseUrl } from "../../../config";
+import { useGetSinglePostQuery, useUpdatePostMutation } from "../../../Redux/feature/post/postApi";
 
 const PostId = () => {
-  const [post, setPost] = useState({});
+  // const [post, setPost] = useState({});
   const [editedPost, setEditedPost] = useState({});
   const [response, setResponse] = useState({});
   const router = useRouter();
   const id = router.query.postId;
-  useEffect(() => {
-    const url = `${getBaseUrl()}/post/findPostByItsId/${id}`;
-    getFunction(url, setPost);
-  }, [post]);
-
-  useEffect(() => {
-    if (response.message) {
-      setPost({ title: "", body: "" });
-    }
-  }, [response]);
-
+  const {data:post,} = useGetSinglePostQuery(id)
+  const [updatePost,{data, isLoading, error}] = useUpdatePostMutation()  
   const blur = (e) => {
     handleBlur(e, editedPost, setEditedPost);
   };
 
   const hanldleSubmit = (e) => {
-    const url = `${getBaseUrl()}/post/update/${id}`;
-    postFunction(url, editedPost, setResponse);
+    updatePost({data:editedPost,id});    
     e.preventDefault();
   };
 
   const handleChange = (e) => {
     const newPost = { post };
     newPost[e.target.name] = e.target.value;
-    setPost(newPost);
+    setEditedPost(newPost);
   };
 
   return (
-    <>
-      {console.log(response)}
+    <>      
       <Header />
-      {response.message && (
+      {data && (
         <div className="flex justify-center mt-4">
           <div className="alert alert-success shadow-lg md:w-4/5">
             <div>
@@ -60,7 +47,7 @@ const PostId = () => {
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>{response.message}</span>
+              <span>{"Updated successfully"}</span>
             </div>
           </div>
         </div>
@@ -75,7 +62,7 @@ const PostId = () => {
                 <input
                   onBlur={blur}
                   onChange={handleChange}
-                  value={post.title}
+                  defaultValue={post.title}
                   className="input w-full my-4 text-black"
                   type="text"
                   name="title"
@@ -84,7 +71,7 @@ const PostId = () => {
                 <textarea
                   onBlur={blur}
                   onChange={handleChange}
-                  value={post.body}
+                  defaultValue={post.body}
                   className="textarea w-full text-black"
                   name="body"
                   id=""

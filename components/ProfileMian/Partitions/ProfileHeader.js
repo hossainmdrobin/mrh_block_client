@@ -8,6 +8,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { getBaseUrl } from "../../../config";
 
 const ProfileHeader = ({ profileDetail }) => {
+  console.log(profileDetail);
   const divStyle = {
     color: "blue",
     borderRadius: "50%",
@@ -31,18 +32,14 @@ const ProfileHeader = ({ profileDetail }) => {
             >
               <Image
                 style={divStyle}
-                src={
-                  profileDetail.profilePic
-                    ? `${getBaseUrl()}/${profileDetail.profilePic}`
-                    : coverpic
-                }
+                src={profileDetail?.profilePic}
                 height={200}
                 width={200}
                 alt="profile"
               />
             </div>
             <div className="ml-3">
-              <p className="text-3xl font-bold">{profileDetail.name}</p>
+              <p className="text-3xl font-bold">{profileDetail?.name}</p>
               <p className="font-bold text-gray-400">1222 friends</p>
             </div>
           </div>

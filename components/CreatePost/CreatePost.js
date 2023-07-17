@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import handleBlur from "../../functions/handleBlur";
-import postFunction from "../../functions/postFunction";
-import { getBaseUrl } from "../../config";
+import { useCreatePostMutation } from "../../Redux/feature/post/postApi";
 
-const CreatePost = ({ response, setResponse }) => {
-  const [post, setPost] = useState({});
-  const [loading, setLoading] = useState(false);
+const CreatePost = () => {
+  const [post, setPost] = useState({});  
 
   const blur = (e) => {
     handleBlur(e, post, setPost);
   };
 
+  const [createPost, {data,isLoading, error}] = useCreatePostMutation()  
+
   const handleSubmit = (e) => {
-    postFunction(`${getBaseUrl()}/post`, post, setResponse, setLoading);
+    // postFunction(`${getBaseUrl()}/post`, post, setResponse, setLoading);
+    createPost(post);
     e.preventDefault();
   };
 
   return (
-    <div className="p-4 mx-1">
+    <div className="md:p-4 mx-1">
       <div className="shadow-xl p-4 border rounded bg-white">
         <p className="text-center text-xl font-bold my-4">Create a post</p>
         <form onSubmit={handleSubmit} className="my-4" action="">
@@ -38,17 +39,17 @@ const CreatePost = ({ response, setResponse }) => {
             rows="5"
           ></textarea>
           <div className="flex justify-center">
-            {!loading && (
+            {!isLoading && (
               <input type="submit" value="Post" className="btn w-full mt-2" />
             )}
-            {loading && (
+            {isLoading && (
               <button className="btn w-full mt-2 loading">
                 Please wait...
               </button>
             )}
           </div>
-          {response && (
-            <p className="text-success mt-2 text-xl">{response.message}</p>
+          {data && (
+            <p className="text-success mt-2 text-xl">Post Created </p>
           )}
         </form>
       </div>

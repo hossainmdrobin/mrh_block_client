@@ -1,17 +1,14 @@
+
 import { useEffect, useState } from "react";
-import getFunction from "../../../functions/getFunction";
 import CreatePost from "../../CreatePost/CreatePost";
 import Post from "../../Posts/Post";
 import ProfileInfo from "../EditProfileContent/ProfileInfo";
-import { getBaseUrl } from "../../../config";
+import { useGetMyPostQuery } from "../../../Redux/feature/post/postApi";
 
-const ProfileBody = ({ profileDetail }) => {
-  const [posts, setPost] = useState([]);
+const ProfileBody = ({ profileDetail }) => {  
   const [response, setResponse] = useState();
-
-  useEffect(() => {
-    getFunction(`${getBaseUrl()}/post`, setPost);
-  }, [response]);
+  const {data:posts, isLoading, error} = useGetMyPostQuery();  
+  
   return (
     <div className="flex justify-center items-center bg-gray-200">
       <div style={{ maxWidth: "950px" }} className="w-full md:flex">
@@ -20,7 +17,7 @@ const ProfileBody = ({ profileDetail }) => {
             <p className="text-2xl font-bold">Intro</p>
             <p className="text-xl font-bold mt-4">Bio</p>
             <div>
-              <p className="text-center my-4">{profileDetail.bio}</p>
+              <p className="text-center my-4">{profileDetail?.bio}</p>
             </div>
             <p className="text-xl font-bold mt-4">About</p>
             <ProfileInfo profileDetail={profileDetail} />
@@ -29,7 +26,7 @@ const ProfileBody = ({ profileDetail }) => {
         <div className="md:w-3/5">
           <CreatePost response={response} setResponse={setResponse} />
           {posts ? (
-            posts.reverse().map((post) => <Post post={post} key={post._id} />)
+            posts?.map((post) => <Post post={post} key={post?._id} />)
           ) : (
             <p className="text-2xl text-red-500">No post Found</p>
           )}

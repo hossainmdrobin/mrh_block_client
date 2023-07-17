@@ -4,8 +4,7 @@ import Image from "next/image";
 import { PencilAltIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import handleBlur from "./../../functions/handleBlur";
-import postFunction from "../../functions/postFunction";
-import { getBaseUrl } from "../../config";
+import { useUpdateProfileMutation, useUpdateProfilePicMutation } from "../../Redux/feature/auth/authApi";
 
 const EditProfile = ({ profileDetail }) => {
   const [editProfilePic, setEditProfilePic] = useState(false);
@@ -14,39 +13,24 @@ const EditProfile = ({ profileDetail }) => {
   const [image, setImage] = useState();
   const router = useRouter();
   const [profilePic, setProfilePic] = useState({});
-  const [loading, setLoading] = useState(false);
+
+  const [updateProfilePic,{data, isLoading, error}] = useUpdateProfilePicMutation();
+  const [updateProfile,{data:infoData,isLoading:infoLoading,isError}] = useUpdateProfileMutation()
 
   //SETTING IMAGE OBJECT TO STATE
   const handleChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
       setProfilePic(e.target.files[0]);
-      console.log(e.target.files[0]);
     }
   };
 
   //SUBMITTING PROFILE PICTURE
   const handleSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
-    const token = localStorage.getItem("token");
     let profileInfo = new FormData();
     profileInfo.append("profilePic", profilePic);
-    fetch(`${getBaseUrl()}/profile/updateProfilePic`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-      body: profileInfo,
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          console.log(data);
-          setLoading(false);
-        }
-      })
-      .catch((error) => console.log(error));
+    updateProfilePic(profileInfo);    
   };
 
   // SETTING PROFILE DETAIL ON STATE
@@ -55,10 +39,8 @@ const EditProfile = ({ profileDetail }) => {
     handleBlur(e, detail, setDetail);
   };
   // SUBMITTING PROFILE DETAIL TO BACKEND
-  const [detailResponse, setDetailResponse] = useState({});
-  const submitDetail = (e) => {
-    const url = `${getBaseUrl()}/profile/updateDetail`;
-    postFunction(url, detail, setDetailResponse, setLoading);
+  const submitDetail = (e) => {    
+    updateProfile(detail);
     e.preventDefault();
   };
 
@@ -81,13 +63,13 @@ const EditProfile = ({ profileDetail }) => {
         {!editProfilePic && (
           <div className="flex items-center justify-center mb-2">
             <span className="rounded-full">
-              <Image
+              {/* <Image
                 src={`${getBaseUrl()}/${profileDetail.profilePic}`}
                 style={roundImg}
                 height={150}
                 width={150}
                 alt="profilepic"
-              />
+              /> */}
             </span>
           </div>
         )}
@@ -95,7 +77,7 @@ const EditProfile = ({ profileDetail }) => {
           <div>
             <div className="flex items-center justify-center mb-2">
               <span className="rounded-full">
-                <Image
+                {/* <Image
                   src={
                     image
                       ? image
@@ -105,7 +87,7 @@ const EditProfile = ({ profileDetail }) => {
                   height={150}
                   width={150}
                   alt="profilepic"
-                />
+                /> */}
               </span>
             </div>
             <form onSubmit={handleSubmit} className="my-8">
@@ -115,10 +97,10 @@ const EditProfile = ({ profileDetail }) => {
                 name="profilePic"
                 id="profilePic"
               />
-              {!loading && (
+              {!isLoading && (
                 <input type="submit" value="Save" className="btn btn-sm" />
               )}
-              {loading && (
+              {isLoading && (
                 <button className="btn btn-sm loading">wait...</button>
               )}
             </form>
@@ -134,7 +116,7 @@ const EditProfile = ({ profileDetail }) => {
         </div>
         {!editBio && (
           <div className="flex items-center justify-center text-gray-500 mb-4">
-            {profileDetail.bio}
+            {profileDetail?.bio}
           </div>
         )}
         {editBio && (
@@ -148,10 +130,10 @@ const EditProfile = ({ profileDetail }) => {
               placeholder="bio"
             />
             <br />
-            {!loading && (
+            {!isLoading && (
               <input type="submit" value="Save" className="btn btn-sm" />
             )}
-            {loading && (
+            {isLoading && (
               <button className="btn btn-sm loading">please wait...</button>
             )}
           </form>
