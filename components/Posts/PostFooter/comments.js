@@ -4,7 +4,6 @@ import Image from "next/image";
 import timeAgo from "../../../Utils/monent";
 
 const Comments = ({ comment }) => {
-  console.log(comment?.user?.profile?.profilePic);
   const profilePic = comment?.user?.profile?.profilePic || defaultUser;
   return (
     <div className="bg-white rounded my-2 p-2 flex">

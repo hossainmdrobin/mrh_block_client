@@ -17,7 +17,6 @@ const CreateProfile = () => {
 
   // REDUX API CALL
   const [createProfile,{data,isLoading,error}] = useCreateProfileMutation()
-  console.log(data,isLoading, error, "profile data post");
 
   const blur = (e) => {
     handleBlur(e, profile, setProfile);

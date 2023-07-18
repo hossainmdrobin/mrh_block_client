@@ -8,7 +8,6 @@ import { XIcon } from "@heroicons/react/outline";
 import { getBaseUrl } from "../../../config";
 
 const ProfileHeader = ({ profileDetail }) => {
-  console.log(profileDetail);
   const divStyle = {
     color: "blue",
     borderRadius: "50%",
