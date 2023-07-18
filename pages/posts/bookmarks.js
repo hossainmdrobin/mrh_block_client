@@ -7,7 +7,6 @@ import Post from "../../components/Posts/Post";
 const Bookmarks = () => {
   // const [bookmarks, setBookmarks] = useState([]);
   const {data:bookmarks, isLoading, error} = useGetBookmarkedPostQuery()
-  console.log(bookmarks, isLoading, error)  
 
   return (
     <>

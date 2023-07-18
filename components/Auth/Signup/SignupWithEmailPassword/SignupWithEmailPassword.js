@@ -17,7 +17,6 @@ const SignupWithEmailPassword = () => {
 
   const [signupWithEmailAndPassword, { data, isLoading, isError }] =
     useSignupWithEmailAndPasswordMutation();
-  console.log(data, isLoading, isError, "signup");
 
   const blur = (e) => {
     handleBlur(e, user, setUser);
