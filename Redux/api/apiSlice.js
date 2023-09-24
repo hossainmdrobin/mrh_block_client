@@ -6,7 +6,7 @@ const apiSlice = createApi({
     reducerPath:"api",
     baseQuery: fetchBaseQuery({
         // baseUrl:"https://mrh-blog-dev.onrender.com",
-        baseUrl:'http://localhost:5000'
+        baseUrl:'https://mrh-blog-dev.onrender.com'
     }),
 
     endpoints:(builder)=>({}),
